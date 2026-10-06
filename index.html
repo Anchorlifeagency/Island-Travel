@@ -161,13 +161,13 @@
       <div class="filter-section">
         <div class="filter-title">👤 Wähle eine Person oder Gesamtübersicht:</div>
         <div class="filter-buttons">
-          <button class="btn-filter active" onclick="showPerson('all')">Gesamte Gruppe (6 P.)</button>
-          <button class="btn-filter" onclick="showPerson('maria')">Maria</button>
-          <button class="btn-filter" onclick="showPerson('matthias')">Matthias</button>
-          <button class="btn-filter" onclick="showPerson('laura')">Laura</button>
-          <button class="btn-filter" onclick="showPerson('rene')">Rene</button>
-          <button class="btn-filter" onclick="showPerson('andrea')">Andrea</button>
-          <button class="btn-filter" onclick="showPerson('mano')">Mano</button>
+          <button class="btn-filter active" id="btn-all" onclick="showPerson('all')">Gesamte Gruppe (6 P.)</button>
+          <button class="btn-filter" id="btn-maria" onclick="showPerson('maria')">Maria</button>
+          <button class="btn-filter" id="btn-matthias" onclick="showPerson('matthias')">Matthias</button>
+          <button class="btn-filter" id="btn-laura" onclick="showPerson('laura')">Laura</button>
+          <button class="btn-filter" id="btn-rene" onclick="showPerson('rene')">Rene</button>
+          <button class="btn-filter" id="btn-andrea" onclick="showPerson('andrea')">Andrea</button>
+          <button class="btn-filter" id="btn-mano" onclick="showPerson('mano')">Mano</button>
         </div>
       </div>
 
@@ -212,7 +212,7 @@
     <!-- Tag 2 -->
     <div class="day-card">
       <div class="day-banner" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
-        <div class="icon">♨️️</div>
+        <div class="icon">♨</div>
         <div class="loc-tag">Reykjadalur</div>
       </div>
       <div class="day-content">
@@ -485,7 +485,7 @@
             <li>Geothermales Bad vor dem Abflug (~55 € p.P.)</li>
           </ul>
         </div>
-        <span class="hotel-badge hotel-confirmed">✈️️ Später Rückflug ab Keflavík</span>
+        <span class="hotel-badge hotel-confirmed">✈ Später Rückflug ab Keflavík</span>
       </div>
     </div>
 
@@ -505,5 +505,4 @@
         items: [
           { name: "Flüge (6x)", val: "3.780,00 €", sub: "630,00 € p.P." },
           { name: "Unterkünfte Gesamt", val: "8.437,89 €", sub: "Hotels 1 - 7" },
-          { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2" },
-          { name: "Verpflegung
+          { 
