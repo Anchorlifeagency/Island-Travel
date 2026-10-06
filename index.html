@@ -1,408 +1,373 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Island Reiseroute Sommer 2027</title>
-  <style>
-    :root {
-      --primary: #1a365d;
-      --accent: #2b6cb0;
-      --highlight: #d69e2e;
-      --bg: #f7fafc;
-      --card-bg: #ffffff;
-      --text: #2d3748;
-      --missing: #e53e3e;
-    }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
-    header {
-      background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=80') center/cover;
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; opacity: 0.95; }
+header {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=80') center/cover;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+header p { font-size: 1.2rem; opacity: 0.95; }
 
-    .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+.container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
-    .route-summary {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 40px;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .summary-item { flex: 1; min-width: 200px; padding: 10px; border-left: 4px solid var(--accent); }
-    .summary-item.alert { border-left-color: var(--missing); }
+.route-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.summary-item { flex: 1; min-width: 200px; padding: 10px; border-left: 4px solid var(--accent); }
+.summary-item.alert { border-left-color: var(--missing); }
 
-    .day-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      display: flex;
-      flex-direction: column;
-    }
-    @media (min-width: 768px) {
-      .day-card { flex-direction: row; }
-      .day-image { width: 40%; object-fit: cover; }
-      .day-content { width: 60%; }
-    }
-    
-    .day-image { height: 260px; width: 100%; object-fit: cover; }
-    .day-content { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
-    
-    .day-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-    .day-number { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
-    .day-date { color: #718096; font-size: 0.9rem; font-weight: 600; }
-    
-    .day-title { font-size: 1.35rem; color: var(--primary); margin-bottom: 10px; }
-    .day-description { font-size: 0.98rem; margin-bottom: 15px; color: #4a5568; }
-    
-    .highlights { list-style: none; margin-bottom: 15px; }
-    .highlights li { position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 0.92rem; }
-    .highlights li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+.day-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .day-card { flex-direction: row; }
+  .day-image { width: 40%; object-fit: cover; }
+  .day-content { width: 60%; }
+}
 
-    .hotel-badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      text-decoration: none;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-    .hotel-confirmed { background: #e2e8f0; color: var(--primary); }
-    .hotel-missing { background: #fed7d7; color: var(--missing); }
+.day-image { height: 260px; width: 100%; object-fit: cover; }
+.day-content { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
 
-    footer { text-align: center; padding: 30px; color: #a0aec0; font-size: 0.9rem; }
-  </style>
-</head>
-<body>
+.day-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.day-number { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+.day-date { color: #718096; font-size: 0.9rem; font-weight: 600; }
 
-  <header>
-    <h1>Island Outdoor & Sightseeing Sommer-Tour</h1>
-    <p>03. Juli – 15. Juli | Mitternachtssonne & entspannte Mehr-Nächte-Stopps</p>
-  </header>
+.day-title { font-size: 1.35rem; color: var(--primary); margin-bottom: 10px; }
+.day-description { font-size: 0.98rem; margin-bottom: 15px; color: #4a5568; }
 
-  <div class="container">
-    
-    <div class="route-summary">
-      <div class="summary-item">
-        <h3>Reisedauer</h3>
-        <p>13 Tage / 12 Nächte</p>
-      </div>
-      <div class="summary-item">
-        <h3>Fahrzeug</h3>
-        <p>Mietwagen (4x4)</p>
-      </div>
-      <div class="summary-item">
-        <h3>Wandern</h3>
-        <p>3 Top-Highlight-Touren</p>
-      </div>
-      <div class="summary-item alert">
-        <h3>Offene Buchungen</h3>
-        <p>2 Nächte (Bifröst & Snæfellsnes)</p>
-      </div>
-    </div>
+.highlights { list-style: none; margin-bottom: 15px; }
+.highlights li { position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 0.92rem; }
+.highlights li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
-    <!-- Tag 1 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=800&q=80" alt="Reykjavik Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 1</span>
-            <span class="day-date">03.07.</span>
-          </div>
-          <h2 class="day-title">Ankunft & Sommerliches Reykjavík</h2>
-          <p class="day-description">Entspannte Ankunft und Erkundung der Hauptstadt unter der Mitternachtssonne.</p>
-          <ul class="highlights">
-            <li>Hallgrímskirkja mit Turm-Aussicht über die bunten Dächer</li>
-            <li>Frische Zimtschnecken bei der Kult-Bäckerei <i>Brauð & Co.</i></li>
-            <li>Harpa Konzert- und Konferenzzentrum & Hafenpromenade</li>
-            <li>Skulptur <i>Sólfar</i> (Sonnenfahrzeug) direkt am Wasser</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (Gebucht)</a>
-      </div>
-    </div>
+.hotel-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.hotel-confirmed { background: #e2e8f0; color: var(--primary); }
+.hotel-missing { background: #fed7d7; color: var(--missing); }
 
-    <!-- Tag 2 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Grünes Thermalfluss-Tal">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 2</span>
-            <span class="day-date">04.07.</span>
-          </div>
-          <h2 class="day-title">Wander-Highlight #1: Reykjadalur Thermalfluss</h2>
-          <p class="day-description">Fahrt Richtung Selfoss mit Badesachen im Rucksack und Zwischenstopps.</p>
-          <ul class="highlights">
-            <li>Wanderung durch das Geothermaltal Reykjadalur (ca. 2,5 Std. hin/zurück)</li>
-            <li>Baden im warmen Fluss im Sommergrün</li>
-            <li>Spaziergang am roten Vulkan-Kratersee Kerið</li>
-            <li>Stopp in Selfoss für Lebensmittel & lokale Snacks</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 1/3)</a>
-      </div>
-    </div>
+footer { text-align: center; padding: 30px; color: #a0aec0; font-size: 0.9rem; }
 
-    <!-- Tag 3 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Gullfoss Wasserfall Tag">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 3</span>
-            <span class="day-date">05.07.</span>
-          </div>
-          <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
-          <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
-          <ul class="highlights">
-            <li>Þingvellir Nationalpark (Walk durch die Erdspalte Almannagjá)</li>
-            <li>Öxarárfoss Wasserfall im Nationalpark</li>
-            <li>Geysir Strokkur (Eruptionen alle 6–10 Minuten)</li>
-            <li>Mächtiger Gullfoss Wasserfall</li>
-            <li>Türkisblauer Wasserfall Brúarfoss (kurzer Spazierweg)</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 2/3)</a>
-      </div>
-    </div>
 
-    <!-- Tag 4 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Canyon Wasserfall">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 4</span>
-            <span class="day-date">06.07.</span>
-          </div>
-          <h2 class="day-title">Þjórsárdalur-Tal & Oasen des Südens</h2>
-          <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen und grünen Schluchten.</p>
-          <ul class="highlights">
-            <li>Háifoss (mit 122 Meter zweithöchster Wasserfall Islands)</li>
-            <li>Nachbar-Wasserfall Granni im selben Canyon</li>
-            <li>Märchenhafte Oase Gjáin (Game of Thrones Drehort)</li>
-            <li>Wasserfall Hjalparfoss mit Basaltformationen</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 3/3)</a>
-      </div>
-    </div>
-
-    <!-- Tag 5 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Seljalandsfoss Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 5</span>
-            <span class="day-date">07.07.</span>
-          </div>
-          <h2 class="day-title">Südküsten-Wasserfälle Richtung Vík</h2>
-          <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern direkt am Weg.</p>
-          <ul class="highlights">
-            <li>Seljalandsfoss (Einmaliger Rundweg hinter den Schleier)</li>
-            <li>Versteckter Höhlenwasserfall Gljúfrabúi direkt daneben</li>
-            <li>Skógafoss Wasserfall & Treppen-Aufstieg zur Aussichtsplattform</li>
-            <li>Skógar Museum mit traditionellen Torfhäusern</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 1/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 6 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Schwarzer Strand Vík">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 6</span>
-            <span class="day-date">08.07.</span>
-          </div>
-          <h2 class="day-title">Papageientaucher, Basalt & Gletscherzunge</h2>
-          <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten zwischen den Highlights.</p>
-          <ul class="highlights">
-            <li>Kap Dyrhólaey: Leuchtturm & Papageientaucher an den Klippen</li>
-            <li>Reynisfjara: Schwarzer Sandstrand, Basalthöhle & Felsnadeln</li>
-            <li>Sólheimajökull: Flacher Spaziergang direkt an die Gletscherzunge</li>
-            <li>Aussichtspunkt bei der Kirche von Vík über das Dorf</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 2/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 7 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1476514525535-ce74f45814d0?auto=format&fit=crop&w=800&q=80" alt="Vulkanische Landschaft">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 7</span>
-            <span class="day-date">09.07.</span>
-          </div>
-          <h2 class="day-title">Fahrt in den Westen & Krater-Panorama</h2>
-          <p class="day-description">Etappe vom Süden gen Westen – mit flexiblen Stopps je nach Lust und Wetter.</p>
-          <ul class="highlights">
-            <li>Fahrt durch den Hvalfjörður-Tunnel nach Borgarnes</li>
-            <li>Aufstieg auf den Vulkankrater Grábrók über Holztreppen</li>
-            <li>Stopp an den ergiebigsten heißen Quellen Europas (Deildartunguhver)</li>
-          </ul>
-        </div>
-        <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (1 Nacht)</span>
-      </div>
-    </div>
-
-    <!-- Tag 8 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Klippen Arnarstapi">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 8</span>
-            <span class="day-date">10.07.</span>
-          </div>
-          <h2 class="day-title">Wander-Highlight #2: Snæfellsnes Küstenweg</h2>
-          <p class="day-description">Verzauberte Küstenlinien und Vulkanlandschaften rund um den Snæfellsjökull.</p>
-          <ul class="highlights">
-            <li>Wasserfälle Hraunfossar & Barnafoss</li>
-            <li>Küstenwanderung Arnarstapi nach Hellnar (ca. 1,5 Std., eben & spektakulär)</li>
-            <li>Schwarzer Kieselstrand Djúpalónssandur mit historischen Hellebarden-Steinen</li>
-            <li>Blick auf die Felsformation Lóndrangar</li>
-          </ul>
-        </div>
-        <span class="hotel-badge hotel-missing">⚠️️ Hotel Halbinsel Westen gesucht (1 Nacht)</span>
-      </div>
-    </div>
-
-    <!-- Tag 9 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Kirkjufell Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 9</span>
-            <span class="day-date">11.07.</span>
-          </div>
-          <h2 class="day-title">Snæfellsnes $\rightarrow$ Borgir (Hrútafjörður)</h2>
-          <p class="day-description">Ikonische Fotospots und Panoramaroute Richtung Eingang der Westfjorde.</p>
-          <ul class="highlights">
-            <li>Kirkjufell-Berg & Kirkjufellsfoss (Islands fotogenster Berg)</li>
-            <li>Bunte Fischerstadt Stykkishólmur</li>
-            <li>Panoramaküstenfahrt entlang des Breiðafjörður</li>
-            <li>Ankunft in Borgir & Entspannung im Hot Tub</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 1/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 10 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Hvítserkur Fels">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 10</span>
-            <span class="day-date">12.07.</span>
-          </div>
-          <h2 class="day-title">Vatnsnes-Runde: Robben & Felsformationen</h2>
-          <p class="day-description">Entspannter Tagesausflug rund um die Halbinsel Vatnsnes.</p>
-          <ul class="highlights">
-            <li>Felsbogen Hvítserkur ("Trinkender Drache" im Meer)</li>
-            <li>Seehund-Beobachtungspunkt Illugastaðir (kurzer Weg zur Beobachtungs-Hütte)</li>
-            <li>Historische Festungsanlage Borgarvirki (vulkanischer Basalt-Pfropfen)</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 2/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 11 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Westfjorde Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 11</span>
-            <span class="day-date">13.07.</span>
-          </div>
-          <h2 class="day-title">Große Fjordfahrt nach Ísafjörður</h2>
-          <p class="day-description">Reine Fahrzeit ca. 4,5 Std. Die Strecke führt spektakulär durch tief eingeschnittene Fjorde.</p>
-          <ul class="highlights">
-            <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
-            <li>Besuch im Arctic Fox Centre in Súðavík (Polarfüchse)</li>
-            <li>Abendlicher Spaziergang durch die historische Altstadt von Ísafjörður</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 1/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 12 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Whale Watching Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 12</span>
-            <span class="day-date">14.07.</span>
-          </div>
-          <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
-          <p class="day-description">Ein perfekter Mix aus Bootstour, Aussichtswanderung und Spitzen-Kulinarik.</p>
-          <ul class="highlights">
-            <li>Whale-Watching-Bootstour ab Hafen Ísafjörður (Buckelwale)</li>
-            <li>Wanderung Naustahvilft ("Trollthron", ca. 1,5 Std. steil, aber grandioser Blick)</li>
-            <li>Aussichtspunkt Bolafjall Skywalk (600m Steilwand über dem Fjord)</li>
-            <li>Abendessen im legendären Fischrestaurant <i>Tjöruhúsið</i></li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 2/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 13 -->
-    <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Dynjandi Wasserfall Sommer">
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 13</span>
-            <span class="day-date">15.07.</span>
-          </div>
-          <h2 class="day-title">Dynjandi-Wasserfall & Thermalabschluss</h2>
-          <p class="day-description">Heimfahrt gen Süden mit Tagesausflug-Charakter vor dem späten Rückflug.</p>
-          <ul class="highlights">
-            <li>Dynjandi-Wasserfall (Der fächerförmige König der Westfjorde)</li>
-            <li>Rückfahrt über die Schotterpässe des Südens Richtung Reykjavík</li>
-            <li>Geothermales Bad in der Sky Lagoon oder Blue Lagoon vor dem Abflug</li>
-            <li>Späte Mietwagenrückgabe & Abflug ab Keflavík</li>
-          </ul>
-        </div>
-        <span class="hotel-badge hotel-confirmed">✈️ Später Rückflug ab Keflavík</span>
-      </div>
-    </div>
-
+<div class="route-summary">
+  <div class="summary-item">
+    <h3>Reisedauer</h3>
+    <p>13 Tage / 12 Nächte</p>
   </div>
+  <div class="summary-item">
+    <h3>Fahrzeug</h3>
+    <p>Mietwagen (4x4)</p>
+  </div>
+  <div class="summary-item">
+    <h3>Wandern</h3>
+    <p>3 Top-Highlight-Touren</p>
+  </div>
+  <div class="summary-item alert">
+    <h3>Offene Buchungen</h3>
+    <p>2 Nächte (Bifröst & Snæfellsnes)</p>
+  </div>
+</div>
 
-  <footer>
-    <p>Gute Reise & Góða ferð!</p>
-  </footer>
+<!-- Tag 1 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=800&q=80" alt="Reykjavik Hallgrímskirkja Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 1</span>
+        <span class="day-date">03.07.</span>
+      </div>
+      <h2 class="day-title">Ankunft & Sommerliches Reykjavík</h2>
+      <p class="day-description">Entspannte Ankunft und Erkundung der Hauptstadt unter der Mitternachtssonne.</p>
+      <ul class="highlights">
+        <li>Hallgrímskirkja mit Turm-Aussicht über die bunten Dächer</li>
+        <li>Frische Zimtschnecken bei der Kult-Bäckerei <i>Brauð & Co.</i></li>
+        <li>Harpa Konzert- und Konferenzzentrum & Hafenpromenade</li>
+        <li>Skulptur <i>Sólfar</i> (Sonnenfahrzeug) direkt am Wasser</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (Gebucht)</a>
+  </div>
+</div>
 
-</body>
-</html>
+<!-- Tag 2 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1543248230-0f2c49ee68ad?auto=format&fit=crop&w=800&q=80" alt="Grünes Geothermaltal Reykjadalur">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 2</span>
+        <span class="day-date">04.07.</span>
+      </div>
+      <h2 class="day-title">Wander-Highlight #1: Reykjadalur Thermalfluss</h2>
+      <p class="day-description">Fahrt Richtung Selfoss mit Badesachen im Rucksack und Zwischenstopps.</p>
+      <ul class="highlights">
+        <li>Wanderung durch das Geothermaltal Reykjadalur (ca. 2,5 Std. hin/zurück)</li>
+        <li>Baden im warmen Fluss im Sommergrün</li>
+        <li>Spaziergang am roten Vulkan-Kratersee Kerið</li>
+        <li>Stopp in Selfoss für Lebensmittel & lokale Snacks</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 1/3)</a>
+  </div>
+</div>
+
+<!-- Tag 3 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Gullfoss Wasserfall im Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 3</span>
+        <span class="day-date">05.07.</span>
+      </div>
+      <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
+      <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
+      <ul class="highlights">
+        <li>Þingvellir Nationalpark (Walk durch die Erdspalte Almannagjá)</li>
+        <li>Öxarárfoss Wasserfall im Nationalpark</li>
+        <li>Geysir Strokkur (Eruptionen alle 6–10 Minuten)</li>
+        <li>Mächtiger Gullfoss Wasserfall</li>
+        <li>Türkisblauer Wasserfall Brúarfoss (kurzer Spazierweg)</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 2/3)</a>
+  </div>
+</div>
+
+<!-- Tag 4 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1563200923-289568984928?auto=format&fit=crop&w=800&q=80" alt="Háifoss Wasserfall im Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 4</span>
+        <span class="day-date">06.07.</span>
+      </div>
+      <h2 class="day-title">Þjórsárdalur-Tal & Oasen des Südens</h2>
+      <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen und grünen Schluchten.</p>
+      <ul class="highlights">
+        <li>Háifoss (mit 122 Meter zweithöchster Wasserfall Islands)</li>
+        <li>Nachbar-Wasserfall Granni im selben Canyon</li>
+        <li>Märchenhafte Oase Gjáin (Game of Thrones Drehort)</li>
+        <li>Wasserfall Hjalparfoss mit Basaltformationen</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 3/3)</a>
+  </div>
+</div>
+
+<!-- Tag 5 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Seljalandsfoss Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 5</span>
+        <span class="day-date">07.07.</span>
+      </div>
+      <h2 class="day-title">Südküsten-Wasserfälle Richtung Vík</h2>
+      <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern direkt am Weg.</p>
+      <ul class="highlights">
+        <li>Seljalandsfoss (Einmaliger Rundweg hinter den Schleier)</li>
+        <li>Versteckter Höhlenwasserfall Gljúfrabúi direkt daneben</li>
+        <li>Skógafoss Wasserfall & Treppen-Aufstieg zur Aussichtsplattform</li>
+        <li>Skógar Museum mit traditionellen Torfhäusern</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 1/2)</a>
+  </div>
+</div>
+
+<!-- Tag 6 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Schwarzer Strand Reynisfjara Vík">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 6</span>
+        <span class="day-date">08.07.</span>
+      </div>
+      <h2 class="day-title">Papageientaucher, Basalt & Gletscherzunge</h2>
+      <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten zwischen den Highlights.</p>
+      <ul class="highlights">
+        <li>Kap Dyrhólaey: Leuchtturm & Papageientaucher an den Klippen</li>
+        <li>Reynisfjara: Schwarzer Sandstrand, Basalthöhle & Felsnadeln</li>
+        <li>Sólheimajökull: Flacher Spaziergang direkt an die Gletscherzunge</li>
+        <li>Aussichtspunkt bei der Kirche von Vík über das Dorf</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 2/2)</a>
+  </div>
+</div>
+
+<!-- Tag 7 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=800&q=80" alt="Grüne Vulkanlandschaft Bifröst">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 7</span>
+        <span class="day-date">09.07.</span>
+      </div>
+      <h2 class="day-title">Fahrt in den Westen & Krater-Panorama</h2>
+      <p class="day-description">Etappe vom Süden gen Westen – mit flexiblen Stopps je nach Lust und Wetter.</p>
+      <ul class="highlights">
+        <li>Fahrt durch den Hvalfjörður-Tunnel nach Borgarnes</li>
+        <li>Aufstieg auf den Vulkankrater Grábrók über Holztreppen</li>
+        <li>Stopp an den ergiebigsten heißen Quellen Europas (Deildartunguhver)</li>
+      </ul>
+    </div>
+    <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (1 Nacht)</span>
+  </div>
+</div>
+
+<!-- Tag 8 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Arnastapi Klippen Snæfellsnes">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 8</span>
+        <span class="day-date">10.07.</span>
+      </div>
+      <h2 class="day-title">Wander-Highlight #2: Snæfellsnes Küstenweg</h2>
+      <p class="day-description">Verzauberte Küstenlinien und Vulkanlandschaften rund um den Snæfellsjökull.</p>
+      <ul class="highlights">
+        <li>Wasserfälle Hraunfossar & Barnafoss</li>
+        <li>Küstenwanderung Arnarstapi nach Hellnar (ca. 1,5 Std., eben & spektakulär)</li>
+        <li>Schwarzer Kieselstrand Djúpalónssandur mit historischen Hellebarden-Steinen</li>
+        <li>Blick auf die Felsformation Lóndrangar</li>
+      </ul>
+    </div>
+    <span class="hotel-badge hotel-missing">⚠️ Hotel Halbinsel Westen gesucht (1 Nacht)</span>
+  </div>
+</div>
+
+<!-- Tag 9 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Kirkjufell Sommer Grün">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 9</span>
+        <span class="day-date">11.07.</span>
+      </div>
+      <h2 class="day-title">Snæfellsnes $\rightarrow$ Borgir (Hrútafjörður)</h2>
+      <p class="day-description">Ikonische Fotospots und Panoramaroute Richtung Eingang der Westfjorde.</p>
+      <ul class="highlights">
+        <li>Kirkjufell-Berg & Kirkjufellsfoss (Islands fotogenster Berg)</li>
+        <li>Bunte Fischerstadt Stykkishólmur</li>
+        <li>Panoramaküstenfahrt entlang des Breiðafjörður</li>
+        <li>Ankunft in Borgir & Entspannung im Hot Tub</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 1/2)</a>
+  </div>
+</div>
+
+<!-- Tag 10 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Hvítserkur Fels im Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 10</span>
+        <span class="day-date">12.07.</span>
+      </div>
+      <h2 class="day-title">Vatnsnes-Runde: Robben & Felsformationen</h2>
+      <p class="day-description">Entspannter Tagesausflug rund um die Halbinsel Vatnsnes.</p>
+      <ul class="highlights">
+        <li>Felsbogen Hvítserkur ("Trinkender Drache" im Meer)</li>
+        <li>Seehund-Beobachtungspunkt Illugastaðir (kurzer Weg zur Beobachtungs-Hütte)</li>
+        <li>Historische Festungsanlage Borgarvirki (vulkanischer Basalt-Pfropfen)</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 2/2)</a>
+  </div>
+</div>
+
+<!-- Tag 11 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Westfjorde Sommer Fjord">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 11</span>
+        <span class="day-date">13.07.</span>
+      </div>
+      <h2 class="day-title">Große Fjordfahrt nach Ísafjörður</h2>
+      <p class="day-description">Reine Fahrzeit ca. 4,5 Std. Die Strecke führt spektakulär durch tief eingeschnittene Fjorde.</p>
+      <ul class="highlights">
+        <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
+        <li>Besuch im Arctic Fox Centre in Súðavík (Polarfüchse)</li>
+        <li>Abendlicher Spaziergang durch die historische Altstadt von Ísafjörður</li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 1/2)</a>
+  </div>
+</div>
+
+<!-- Tag 12 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Whale Watching im Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 12</span>
+        <span class="day-date">14.07.</span>
+      </div>
+      <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
+      <p class="day-description">Ein perfekter Mix aus Bootstour, Aussichtswanderung und Spitzen-Kulinarik.</p>
+      <ul class="highlights">
+        <li>Whale-Watching-Bootstour ab Hafen Ísafjörður (Buckelwale)</li>
+        <li>Wanderung Naustahvilft ("Trollthron", ca. 1,5 Std. steil, aber grandioser Blick)</li>
+        <li>Aussichtspunkt Bolafjall Skywalk (600m Steilwand über dem Fjord)</li>
+        <li>Abendessen im legendären Fischrestaurant <i>Tjöruhúsið</i></li>
+      </ul>
+    </div>
+    <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 2/2)</a>
+  </div>
+</div>
+
+<!-- Tag 13 -->
+<div class="day-card">
+  <img class="day-image" src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80" alt="Dynjandi Wasserfall Sommer">
+  <div class="day-content">
+    <div>
+      <div class="day-header">
+        <span class="day-number">Tag 13</span>
+        <span class="day-date">15.07.</span>
+      </div>
+      <h2 class="day-title">Dynjandi-Wasserfall & Thermalabschluss</h2>
+      <p class="day-description">Heimfahrt gen Süden mit Tagesausflug-Charakter vor dem späten Rückflug.</p>
+      <ul class="highlights">
+        <li>Dynjandi-Wasserfall (Der fächerförmige König der Westfjorde)</li>
+        <li>Rückfahrt über die Schotterpässe des Südens Richtung Reykjavík</li>
+        <li>Geothermales Bad in der Sky Lagoon oder Blue Lagoon vor dem Abflug</li>
+        <li>Späte Mietwagenrückgabe & Abflug ab Keflavík</li>
+      </ul>
+    </div>
+    <span class="hotel-badge hotel-confirmed">✈️ Später Rückflug ab Keflavík</span>
+  </div>
+</div>
