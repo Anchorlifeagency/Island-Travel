@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Island Reiseroute Sommer 2027</title>
+  <title>Island Reiseroute & Budget Sommer 2027</title>
   <style>
     :root {
       --primary: #1a365d;
@@ -13,6 +13,7 @@
       --card-bg: #ffffff;
       --text: #2d3748;
       --missing: #e53e3e;
+      --success: #38a169;
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,26 +23,83 @@
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       text-align: center;
-      padding: 70px 20px;
+      padding: 60px 20px 40px;
     }
-    header h1 { font-size: 2.4rem; margin-bottom: 10px; }
+    header h1 { font-size: 2.3rem; margin-bottom: 10px; }
     header p { font-size: 1.1rem; opacity: 0.9; }
 
-    .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
 
-    .route-summary {
+    /* Kosten-Rechner Dashboard */
+    .budget-dashboard {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-top: 5px solid var(--accent);
+    }
+    .budget-header {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
       gap: 15px;
-      margin-bottom: 40px;
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     }
-    .summary-item { flex: 1; min-width: 200px; padding: 10px; border-left: 4px solid var(--accent); }
-    .summary-item.alert { border-left-color: var(--missing); }
+    .budget-title { font-size: 1.4rem; color: var(--primary); font-weight: bold; }
+    
+    /* Toggle Buttons */
+    .filter-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-filter {
+      background: #edf2f7;
+      border: 1px solid #cbd5e0;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .btn-filter.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
 
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .cost-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .cost-card h4 { font-size: 0.9rem; color: #718096; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cost-card .amount { font-size: 1.5rem; color: var(--primary); font-weight: bold; }
+    .cost-card .note { font-size: 0.8rem; color: #a0aec0; margin-top: 4px; }
+
+    .total-box {
+      background: #ebf8ff;
+      border: 1px solid #bee3f8;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .total-title { font-size: 1.1rem; font-weight: bold; color: var(--primary); }
+    .total-amount { font-size: 2rem; font-weight: bold; color: var(--accent); }
+
+    /* Tageskarten */
     .day-card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -63,9 +121,10 @@
 
     .day-content { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
     
-    .day-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-    .day-number { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
-    .day-date { color: #718096; font-size: 0.9rem; font-weight: 600; }
+    .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 5px; }
+    .day-number { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
+    .day-date { color: #718096; font-size: 0.85rem; font-weight: 600; }
+    .day-cost-badge { background: #e6fffa; color: #234e52; border: 1px solid #b2f5ea; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; }
     
     .day-title { font-size: 1.35rem; color: var(--primary); margin-bottom: 10px; }
     .day-description { font-size: 0.98rem; margin-bottom: 15px; color: #4a5568; }
@@ -98,22 +157,54 @@
 
   <div class="container">
     
-    <div class="route-summary">
-      <div class="summary-item">
-        <h3>Reisedauer</h3>
-        <p>13 Tage / 12 Nächte</p>
+    <!-- Kosten-Dashboard mit Filter -->
+    <div class="budget-dashboard">
+      <div class="budget-header">
+        <div class="budget-title">💰 Erwartete Reisekosten-Übersicht</div>
+        <div class="filter-buttons">
+          <button class="btn-filter active" onclick="setMode('total')">Gesamt (4 Personen)</button>
+          <button class="btn-filter" onclick="setMode('per_person')">Pro Person (Ø 1/4)</button>
+        </div>
       </div>
-      <div class="summary-item">
-        <h3>Fahrzeug</h3>
-        <p>Mietwagen (4x4)</p>
+
+      <div class="cost-grid">
+        <div class="cost-card">
+          <h4>🚗 Mietwagen (4x4 SUV)</h4>
+          <div class="amount" id="cost-car">1.200 €</div>
+          <div class="note">Mittelklasse Allrad für 13 Tage</div>
+        </div>
+
+        <div class="cost-card">
+          <h4>⛽ Treibstoff (+10% Puffer)</h4>
+          <div class="amount" id="cost-fuel">400 €</div>
+          <div class="note">ca. 2.600 km Streckennetz</div>
+        </div>
+
+        <div class="cost-card">
+          <h4>🏡 Unterkünfte (12 Nächte)</h4>
+          <div class="amount" id="cost-stay">3.200 €</div>
+          <div class="note">6 gebuchte Apartments/Hotels</div>
+        </div>
+
+        <div class="cost-card">
+          <h4>🛒 Verpflegung (60/40 Split)</h4>
+          <div class="amount" id="cost-food">2.720 €</div>
+          <div class="note">Supermarkt + Kochen + Restaurants</div>
+        </div>
+
+        <div class="cost-card">
+          <h4>🐋 Touren & Eintritt</h4>
+          <div class="amount" id="cost-tours">600 €</div>
+          <div class="note">Whale Watching, Thermalbäder, Kerið</div>
+        </div>
       </div>
-      <div class="summary-item">
-        <h3>Wandern</h3>
-        <p>3 Top-Highlight-Touren</p>
-      </div>
-      <div class="summary-item alert">
-        <h3>Offene Buchungen</h3>
-        <p>2 Nächte (Bifröst & Snæfellsnes)</p>
+
+      <div class="total-box">
+        <div>
+          <div class="total-title" id="total-label">Gesamtkosten für alle 4 Personen</div>
+          <div style="font-size: 0.85rem; color: #4a5568;">Inklusive aller Fixkosten, Treibstoff-Puffer & Verpflegung</div>
+        </div>
+        <div class="total-amount" id="total-amount">8.120 €</div>
       </div>
     </div>
 
@@ -126,11 +217,14 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 1</span>
-            <span class="day-date">03.07.</span>
+            <div>
+              <span class="day-number">Tag 1</span>
+              <span class="day-date">03.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~180 € (Gesamt) | ~45 € p.P.</span>
           </div>
           <h2 class="day-title">Ankunft & Sommerliches Reykjavík</h2>
-          <p class="day-description">Entspannte Ankunft und Erkundung der Hauptstadt unter der Mitternachtssonne.</p>
+          <p class="day-description">Entspannte Ankunft, Mietwagenübernahme und Erkundung der Hauptstadt.</p>
           <ul class="highlights">
             <li>Hallgrímskirkja mit Turm-Aussicht über die bunten Dächer</li>
             <li>Frische Zimtschnecken bei der Kult-Bäckerei <i>Brauð & Co.</i></li>
@@ -151,16 +245,19 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 2</span>
-            <span class="day-date">04.07.</span>
+            <div>
+              <span class="day-number">Tag 2</span>
+              <span class="day-date">04.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~210 € (Gesamt) | ~52 € p.P.</span>
           </div>
           <h2 class="day-title">Wander-Highlight #1: Reykjadalur Thermalfluss</h2>
           <p class="day-description">Fahrt Richtung Selfoss mit Badesachen im Rucksack und Zwischenstopps.</p>
           <ul class="highlights">
             <li>Wanderung durch das Geothermaltal Reykjadalur (ca. 2,5 Std. hin/zurück)</li>
             <li>Baden im warmen Fluss im Sommergrün</li>
-            <li>Spaziergang am roten Vulkan-Kratersee Kerið</li>
-            <li>Stopp in Selfoss für Lebensmittel & lokale Snacks</li>
+            <li>Spaziergang am roten Vulkan-Kratersee Kerið (~4 € Eintritt p.P.)</li>
+            <li>Stopp in Selfoss für Bónus-Großeinkauf</li>
           </ul>
         </div>
         <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 1/3)</a>
@@ -176,8 +273,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 3</span>
-            <span class="day-date">05.07.</span>
+            <div>
+              <span class="day-number">Tag 3</span>
+              <span class="day-date">05.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~220 € (Gesamt) | ~55 € p.P.</span>
           </div>
           <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
           <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
@@ -202,8 +302,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 4</span>
-            <span class="day-date">06.07.</span>
+            <div>
+              <span class="day-number">Tag 4</span>
+              <span class="day-date">06.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~190 € (Gesamt) | ~47 € p.P.</span>
           </div>
           <h2 class="day-title">Þjórsárdalur-Tal & Oasen des Südens</h2>
           <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen und grünen Schluchten.</p>
@@ -227,8 +330,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 5</span>
-            <span class="day-date">07.07.</span>
+            <div>
+              <span class="day-number">Tag 5</span>
+              <span class="day-date">07.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~230 € (Gesamt) | ~57 € p.P.</span>
           </div>
           <h2 class="day-title">Südküsten-Wasserfälle Richtung Vík</h2>
           <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern direkt am Weg.</p>
@@ -252,8 +358,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 6</span>
-            <span class="day-date">08.07.</span>
+            <div>
+              <span class="day-number">Tag 6</span>
+              <span class="day-date">08.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~240 € (Gesamt) | ~60 € p.P.</span>
           </div>
           <h2 class="day-title">Papageientaucher, Basalt & Gletscherzunge</h2>
           <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten zwischen den Highlights.</p>
@@ -261,7 +370,7 @@
             <li>Kap Dyrhólaey: Leuchtturm & Papageientaucher an den Klippen</li>
             <li>Reynisfjara: Schwarzer Sandstrand, Basalthöhle & Felsnadeln</li>
             <li>Sólheimajökull: Flacher Spaziergang direkt an die Gletscherzunge</li>
-            <li>Aussichtspunkt bei der Kirche von Vík über das Dorf</li>
+            <li>Abendessen / Imbiss in Vík (z. B. Black Crust Pizzeria)</li>
           </ul>
         </div>
         <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 2/2)</a>
@@ -277,8 +386,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 7</span>
-            <span class="day-date">09.07.</span>
+            <div>
+              <span class="day-number">Tag 7</span>
+              <span class="day-date">09.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~260 € (Gesamt) | ~65 € p.P.</span>
           </div>
           <h2 class="day-title">Fahrt in den Westen & Krater-Panorama</h2>
           <p class="day-description">Etappe vom Süden gen Westen – mit flexiblen Stopps je nach Lust und Wetter.</p>
@@ -301,8 +413,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 8</span>
-            <span class="day-date">10.07.</span>
+            <div>
+              <span class="day-number">Tag 8</span>
+              <span class="day-date">10.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~220 € (Gesamt) | ~55 € p.P.</span>
           </div>
           <h2 class="day-title">Wander-Highlight #2: Snæfellsnes Küstenweg</h2>
           <p class="day-description">Verzauberte Küstenlinien und Vulkanlandschaften rund um den Snæfellsjökull.</p>
@@ -326,8 +441,11 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 9</span>
-            <span class="day-date">11.07.</span>
+            <div>
+              <span class="day-number">Tag 9</span>
+              <span class="day-date">11.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~210 € (Gesamt) | ~52 € p.P.</span>
           </div>
           <h2 class="day-title">Snæfellsnes $\rightarrow$ Borgir (Hrútafjörður)</h2>
           <p class="day-description">Ikonische Fotospots und Panoramaroute Richtung Eingang der Westfjorde.</p>
@@ -351,100 +469,15 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <span class="day-number">Tag 10</span>
-            <span class="day-date">12.07.</span>
+            <div>
+              <span class="day-number">Tag 10</span>
+              <span class="day-date">12.07.</span>
+            </div>
+            <span class="day-cost-badge">Ø Tagesbudget: ~180 € (Gesamt) | ~45 € p.P.</span>
           </div>
           <h2 class="day-title">Vatnsnes-Runde: Robben & Felsformationen</h2>
           <p class="day-description">Entspannter Tagesausflug rund um die Halbinsel Vatnsnes.</p>
           <ul class="highlights">
             <li>Felsbogen Hvítserkur ("Trinkender Drache" im Meer)</li>
             <li>Seehund-Beobachtungspunkt Illugastaðir (kurzer Weg zur Beobachtungs-Hütte)</li>
-            <li>Historische Festungsanlage Borgarvirki (vulkanischer Basalt-Pfropfen)</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 2/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 11 -->
-    <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #303f9f, #1a237e);">
-        <div class="icon">⛵</div>
-        <div class="loc-tag">Westfjorde</div>
-      </div>
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 11</span>
-            <span class="day-date">13.07.</span>
-          </div>
-          <h2 class="day-title">Große Fjordfahrt nach Ísafjörður</h2>
-          <p class="day-description">Reine Fahrzeit ca. 4,5 Std. Die Strecke führt spektakulär durch tief eingeschnittene Fjorde.</p>
-          <ul class="highlights">
-            <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
-            <li>Besuch im Arctic Fox Centre in Súðavík (Polarfüchse)</li>
-            <li>Abendlicher Spaziergang durch die historische Altstadt von Ísafjörður</li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 1/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 12 -->
-    <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #00838f, #006064);">
-        <div class="icon">🐋</div>
-        <div class="loc-tag">Ísafjörður</div>
-      </div>
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 12</span>
-            <span class="day-date">14.07.</span>
-          </div>
-          <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
-          <p class="day-description">Ein perfekter Mix aus Bootstour, Aussichtswanderung und Spitzen-Kulinarik.</p>
-          <ul class="highlights">
-            <li>Whale-Watching-Bootstour ab Hafen Ísafjörður (Buckelwale)</li>
-            <li>Wanderung Naustahvilft ("Trollthron", ca. 1,5 Std. steil, aber grandioser Blick)</li>
-            <li>Aussichtspunkt Bolafjall Skywalk (600m Steilwand über dem Fjord)</li>
-            <li>Abendessen im legendären Fischrestaurant <i>Tjöruhúsið</i></li>
-          </ul>
-        </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (Nacht 2/2)</a>
-      </div>
-    </div>
-
-    <!-- Tag 13 -->
-    <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #c2185b, #880e4f);">
-        <div class="icon">✈️</div>
-        <div class="loc-tag">Dynjandi / Rückflug</div>
-      </div>
-      <div class="day-content">
-        <div>
-          <div class="day-header">
-            <span class="day-number">Tag 13</span>
-            <span class="day-date">15.07.</span>
-          </div>
-          <h2 class="day-title">Dynjandi-Wasserfall & Thermalabschluss</h2>
-          <p class="day-description">Heimfahrt gen Süden mit Tagesausflug-Charakter vor dem späten Rückflug.</p>
-          <ul class="highlights">
-            <li>Dynjandi-Wasserfall (Der fächerförmige König der Westfjorde)</li>
-            <li>Rückfahrt über die Schotterpässe des Südens Richtung Reykjavík</li>
-            <li>Geothermales Bad in der Sky Lagoon oder Blue Lagoon vor dem Abflug</li>
-            <li>Späte Mietwagenrückgabe & Abflug ab Keflavík</li>
-          </ul>
-        </div>
-        <span class="hotel-badge hotel-confirmed">✈️ Später Rückflug ab Keflavík</span>
-      </div>
-    </div>
-
-  </div>
-
-  <footer>
-    <p>Gute Reise & Góða ferð!</p>
-  </footer>
-
-</body>
-</html>
+            <li>Historis
