@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Island Reiseroute & Budget Sommer 2027</title>
+  <title>Island Reiseroute & Individuelle Kosten</title>
   <style>
     :root {
       --primary: #1a365d;
       --accent: #2b6cb0;
-      --highlight: #d69e2e;
       --bg: #f7fafc;
       --card-bg: #ffffff;
       --text: #2d3748;
       --missing: #e53e3e;
-      --success: #38a169;
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,14 +21,14 @@
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       text-align: center;
-      padding: 60px 20px 40px;
+      padding: 50px 20px 30px;
     }
-    header h1 { font-size: 2.3rem; margin-bottom: 10px; }
-    header p { font-size: 1.1rem; opacity: 0.9; }
+    header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+    header p { font-size: 1.05rem; opacity: 0.9; }
 
     .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
 
-    /* Kosten-Rechner Dashboard */
+    /* Dashboard & Filter Buttons */
     .budget-dashboard {
       background: var(--card-bg);
       border-radius: 12px;
@@ -39,17 +37,18 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       border-top: 5px solid var(--accent);
     }
-    .budget-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      gap: 15px;
-    }
-    .budget-title { font-size: 1.4rem; color: var(--primary); font-weight: bold; }
     
-    /* Toggle Buttons */
+    .filter-section {
+      margin-bottom: 20px;
+    }
+    .filter-title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #718096;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    
     .filter-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn-filter {
       background: #edf2f7;
@@ -58,31 +57,33 @@
       border-radius: 20px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text);
       transition: all 0.2s ease;
     }
+    .btn-filter:hover { background: #e2e8f0; }
     .btn-filter.active {
       background: var(--accent);
       color: white;
       border-color: var(--accent);
     }
 
-    .cost-grid {
+    /* Person-Cards Details */
+    .person-breakdown {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
     }
-    .cost-card {
+    .item-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 15px;
+      padding: 12px 15px;
     }
-    .cost-card h4 { font-size: 0.9rem; color: #718096; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .cost-card .amount { font-size: 1.5rem; color: var(--primary); font-weight: bold; }
-    .cost-card .note { font-size: 0.8rem; color: #a0aec0; margin-top: 4px; }
+    .item-card h4 { font-size: 0.85rem; color: #718096; text-transform: uppercase; }
+    .item-card .val { font-size: 1.25rem; font-weight: bold; color: var(--primary); margin-top: 2px; }
+    .item-card .sub { font-size: 0.78rem; color: #a0aec0; }
 
     .total-box {
       background: #ebf8ff;
@@ -97,50 +98,48 @@
       gap: 10px;
     }
     .total-title { font-size: 1.1rem; font-weight: bold; color: var(--primary); }
-    .total-amount { font-size: 2rem; font-weight: bold; color: var(--accent); }
+    .total-amount { font-size: 2.2rem; font-weight: bold; color: var(--accent); }
 
-    /* Tageskarten */
+    /* Day cards styling */
     .day-card {
       background: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
     }
     @media (min-width: 768px) {
       .day-card { flex-direction: row; }
-      .day-banner { width: 35%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; padding: 30px 20px; text-align: center; }
-      .day-content { width: 65%; }
+      .day-banner { width: 32%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; padding: 25px 15px; text-align: center; }
+      .day-content { width: 68%; }
     }
 
-    .day-banner { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%); padding: 30px 20px; color: white; text-align: center; }
-    .day-banner .icon { font-size: 3rem; margin-bottom: 10px; }
+    .day-banner { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%); padding: 25px 15px; color: white; text-align: center; }
+    .day-banner .icon { font-size: 2.8rem; margin-bottom: 5px; }
     .day-banner .loc-tag { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; }
 
-    .day-content { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
-    
-    .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 5px; }
-    .day-number { background: var(--primary); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
+    .day-content { padding: 20px 25px; display: flex; flex-direction: column; justify-content: space-between; }
+    .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+    .day-number { background: var(--primary); color: white; padding: 3px 10px; border-radius: 15px; font-weight: bold; font-size: 0.85rem; }
     .day-date { color: #718096; font-size: 0.85rem; font-weight: 600; }
-    .day-cost-badge { background: #e6fffa; color: #234e52; border: 1px solid #b2f5ea; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; }
     
-    .day-title { font-size: 1.35rem; color: var(--primary); margin-bottom: 10px; }
-    .day-description { font-size: 0.98rem; margin-bottom: 15px; color: #4a5568; }
+    .day-title { font-size: 1.25rem; color: var(--primary); margin-bottom: 8px; }
+    .day-description { font-size: 0.95rem; margin-bottom: 12px; color: #4a5568; }
     
-    .highlights { list-style: none; margin-bottom: 15px; }
-    .highlights li { position: relative; padding-left: 20px; margin-bottom: 6px; font-size: 0.92rem; }
+    .highlights { list-style: none; margin-bottom: 12px; }
+    .highlights li { position: relative; padding-left: 18px; margin-bottom: 4px; font-size: 0.9rem; }
     .highlights li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
     .hotel-badge {
       display: inline-block;
-      padding: 8px 14px;
+      padding: 6px 12px;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-decoration: none;
       font-weight: 600;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     .hotel-confirmed { background: #e2e8f0; color: var(--primary); }
     .hotel-missing { background: #fed7d7; color: var(--missing); }
@@ -151,62 +150,41 @@
 <body>
 
   <header>
-    <h1>Island Outdoor & Sightseeing Sommer-Tour</h1>
-    <p>03. Juli – 15. Juli | Mitternachtssonne & entspannte Mehr-Nächte-Stopps</p>
+    <h1>Island Sommer-Tour 2027</h1>
+    <p>6 Personen | 2 Autos | Erwartete Kostenaufstellung</p>
   </header>
 
   <div class="container">
     
-    <!-- Kosten-Dashboard mit Filter -->
+    <!-- Personenspezifisches Kosten-Dashboard -->
     <div class="budget-dashboard">
-      <div class="budget-header">
-        <div class="budget-title">💰 Erwartete Reisekosten-Übersicht</div>
+      <div class="filter-section">
+        <div class="filter-title">👤 Wähle eine Person oder Gesamtübersicht:</div>
         <div class="filter-buttons">
-          <button class="btn-filter active" onclick="setMode('total')">Gesamt (4 Personen)</button>
-          <button class="btn-filter" onclick="setMode('per_person')">Pro Person (Ø 1/4)</button>
+          <button class="btn-filter active" onclick="showPerson('all')">Gesamte Gruppe (6 P.)</button>
+          <button class="btn-filter" onclick="showPerson('maria')">Maria</button>
+          <button class="btn-filter" onclick="showPerson('matthias')">Matthias</button>
+          <button class="btn-filter" onclick="showPerson('laura')">Laura</button>
+          <button class="btn-filter" onclick="showPerson('rene')">Rene</button>
+          <button class="btn-filter" onclick="showPerson('andrea')">Andrea</button>
+          <button class="btn-filter" onclick="showPerson('mano')">Mano</button>
         </div>
       </div>
 
-      <div class="cost-grid">
-        <div class="cost-card">
-          <h4>🚗 Mietwagen (4x4 SUV)</h4>
-          <div class="amount" id="cost-car">1.200 €</div>
-          <div class="note">Mittelklasse Allrad für 13 Tage</div>
-        </div>
-
-        <div class="cost-card">
-          <h4>⛽ Treibstoff (+10% Puffer)</h4>
-          <div class="amount" id="cost-fuel">400 €</div>
-          <div class="note">ca. 2.600 km Streckennetz</div>
-        </div>
-
-        <div class="cost-card">
-          <h4>🏡 Unterkünfte (12 Nächte)</h4>
-          <div class="amount" id="cost-stay">3.200 €</div>
-          <div class="note">6 gebuchte Apartments/Hotels</div>
-        </div>
-
-        <div class="cost-card">
-          <h4>🛒 Verpflegung (60/40 Split)</h4>
-          <div class="amount" id="cost-food">2.720 €</div>
-          <div class="note">Supermarkt + Kochen + Restaurants</div>
-        </div>
-
-        <div class="cost-card">
-          <h4>🐋 Touren & Eintritt</h4>
-          <div class="amount" id="cost-tours">600 €</div>
-          <div class="note">Whale Watching, Thermalbäder, Kerið</div>
-        </div>
+      <div class="person-breakdown" id="breakdown-grid">
+        <!-- Dynamische Inhalte werden über JS eingefügt -->
       </div>
 
       <div class="total-box">
         <div>
-          <div class="total-title" id="total-label">Gesamtkosten für alle 4 Personen</div>
-          <div style="font-size: 0.85rem; color: #4a5568;">Inklusive aller Fixkosten, Treibstoff-Puffer & Verpflegung</div>
+          <div class="total-title" id="total-label">Gesamtkosten Reise</div>
+          <div style="font-size: 0.85rem; color: #4a5568;" id="total-sub">Exakte Summe laut Aufstellung</div>
         </div>
-        <div class="total-amount" id="total-amount">8.120 €</div>
+        <div class="total-amount" id="total-amount">18.095,29 €</div>
       </div>
     </div>
+
+    <!-- TAGESABLAUF -->
 
     <!-- Tag 1 -->
     <div class="day-card">
@@ -217,22 +195,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 1</span>
-              <span class="day-date">03.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~180 € (Gesamt) | ~45 € p.P.</span>
+            <span class="day-number">Tag 1</span>
+            <span class="day-date">03.07.</span>
           </div>
           <h2 class="day-title">Ankunft & Sommerliches Reykjavík</h2>
-          <p class="day-description">Entspannte Ankunft, Mietwagenübernahme und Erkundung der Hauptstadt.</p>
+          <p class="day-description">Entspannte Ankunft der Gruppe, Übernahme beider Mietwagen und Stadtbummel.</p>
           <ul class="highlights">
-            <li>Hallgrímskirkja mit Turm-Aussicht über die bunten Dächer</li>
-            <li>Frische Zimtschnecken bei der Kult-Bäckerei <i>Brauð & Co.</i></li>
+            <li>Hallgrímskirkja & Brauð & Co. (Zimtschnecken)</li>
             <li>Harpa Konzert- und Konferenzzentrum & Hafenpromenade</li>
-            <li>Skulptur <i>Sólfar</i> (Sonnenfahrzeug) direkt am Wasser</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (Gebucht)</a>
+        <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (6 Pers.)</a>
       </div>
     </div>
 
@@ -245,22 +218,18 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 2</span>
-              <span class="day-date">04.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~210 € (Gesamt) | ~52 € p.P.</span>
+            <span class="day-number">Tag 2</span>
+            <span class="day-date">04.07.</span>
           </div>
           <h2 class="day-title">Wander-Highlight #1: Reykjadalur Thermalfluss</h2>
           <p class="day-description">Fahrt Richtung Selfoss mit Badesachen im Rucksack und Zwischenstopps.</p>
           <ul class="highlights">
-            <li>Wanderung durch das Geothermaltal Reykjadalur (ca. 2,5 Std. hin/zurück)</li>
+            <li>Wanderung durch das Geothermaltal Reykjadalur</li>
             <li>Baden im warmen Fluss im Sommergrün</li>
-            <li>Spaziergang am roten Vulkan-Kratersee Kerið (~4 € Eintritt p.P.)</li>
-            <li>Stopp in Selfoss für Bónus-Großeinkauf</li>
+            <li>Spaziergang am Kratersee Kerið</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 1/3)</a>
+        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 1/3)</a>
       </div>
     </div>
 
@@ -273,23 +242,18 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 3</span>
-              <span class="day-date">05.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~220 € (Gesamt) | ~55 € p.P.</span>
+            <span class="day-number">Tag 3</span>
+            <span class="day-date">05.07.</span>
           </div>
           <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
           <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
           <ul class="highlights">
-            <li>Þingvellir Nationalpark (Walk durch die Erdspalte Almannagjá)</li>
-            <li>Öxarárfoss Wasserfall im Nationalpark</li>
-            <li>Geysir Strokkur (Eruptionen alle 6–10 Minuten)</li>
-            <li>Mächtiger Gullfoss Wasserfall</li>
-            <li>Türkisblauer Wasserfall Brúarfoss (kurzer Spazierweg)</li>
+            <li>Þingvellir Nationalpark (Erdspalte Almannagjá)</li>
+            <li>Geysir Strokkur & Gullfoss Wasserfall</li>
+            <li>Wasserfall Brúarfoss</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 2/3)</a>
+        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 2/3)</a>
       </div>
     </div>
 
@@ -302,22 +266,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 4</span>
-              <span class="day-date">06.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~190 € (Gesamt) | ~47 € p.P.</span>
+            <span class="day-number">Tag 4</span>
+            <span class="day-date">06.07.</span>
           </div>
           <h2 class="day-title">Þjórsárdalur-Tal & Oasen des Südens</h2>
-          <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen und grünen Schluchten.</p>
+          <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen.</p>
           <ul class="highlights">
-            <li>Háifoss (mit 122 Meter zweithöchster Wasserfall Islands)</li>
-            <li>Nachbar-Wasserfall Granni im selben Canyon</li>
-            <li>Märchenhafte Oase Gjáin (Game of Thrones Drehort)</li>
-            <li>Wasserfall Hjalparfoss mit Basaltformationen</li>
+            <li>Háifoss (zweithöchster Wasserfall Islands)</li>
+            <li>Märchenhafte Oase Gjáin</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (Nacht 3/3)</a>
+        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 3/3)</a>
       </div>
     </div>
 
@@ -330,22 +289,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 5</span>
-              <span class="day-date">07.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~230 € (Gesamt) | ~57 € p.P.</span>
+            <span class="day-number">Tag 5</span>
+            <span class="day-date">07.07.</span>
           </div>
           <h2 class="day-title">Südküsten-Wasserfälle Richtung Vík</h2>
-          <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern direkt am Weg.</p>
+          <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern am Weg.</p>
           <ul class="highlights">
-            <li>Seljalandsfoss (Einmaliger Rundweg hinter den Schleier)</li>
-            <li>Versteckter Höhlenwasserfall Gljúfrabúi direkt daneben</li>
-            <li>Skógafoss Wasserfall & Treppen-Aufstieg zur Aussichtsplattform</li>
-            <li>Skógar Museum mit traditionellen Torfhäusern</li>
+            <li>Seljalandsfoss & Höhlenwasserfall Gljúfrabúi</li>
+            <li>Skógafoss Wasserfall & Treppen-Aufstieg</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 1/2)</a>
+        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 1/2)</a>
       </div>
     </div>
 
@@ -358,22 +312,18 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 6</span>
-              <span class="day-date">08.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~240 € (Gesamt) | ~60 € p.P.</span>
+            <span class="day-number">Tag 6</span>
+            <span class="day-date">08.07.</span>
           </div>
           <h2 class="day-title">Papageientaucher, Basalt & Gletscherzunge</h2>
-          <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten zwischen den Highlights.</p>
+          <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten.</p>
           <ul class="highlights">
-            <li>Kap Dyrhólaey: Leuchtturm & Papageientaucher an den Klippen</li>
-            <li>Reynisfjara: Schwarzer Sandstrand, Basalthöhle & Felsnadeln</li>
-            <li>Sólheimajökull: Flacher Spaziergang direkt an die Gletscherzunge</li>
-            <li>Abendessen / Imbiss in Vík (z. B. Black Crust Pizzeria)</li>
+            <li>Kap Dyrhólaey: Leuchtturm & Papageientaucher</li>
+            <li>Reynisfjara: Schwarzer Sandstrand & Basaltsäulen</li>
+            <li>Sólheimajökull Gletscherzunge</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (Nacht 2/2)</a>
+        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 2/2)</a>
       </div>
     </div>
 
@@ -386,21 +336,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 7</span>
-              <span class="day-date">09.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~260 € (Gesamt) | ~65 € p.P.</span>
+            <span class="day-number">Tag 7</span>
+            <span class="day-date">09.07.</span>
           </div>
           <h2 class="day-title">Fahrt in den Westen & Krater-Panorama</h2>
-          <p class="day-description">Etappe vom Süden gen Westen – mit flexiblen Stopps je nach Lust und Wetter.</p>
+          <p class="day-description">Etappe vom Süden gen Westen.</p>
           <ul class="highlights">
-            <li>Fahrt durch den Hvalfjörður-Tunnel nach Borgarnes</li>
-            <li>Aufstieg auf den Vulkankrater Grábrók über Holztreppen</li>
-            <li>Stopp an den ergiebigsten heißen Quellen Europas (Deildartunguhver)</li>
+            <li>Aufstieg auf den Vulkankrater Grábrók</li>
+            <li>Heiße Quellen Deildartunguhver</li>
           </ul>
         </div>
-        <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (1 Nacht)</span>
+        <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (4 Pers.)</span>
       </div>
     </div>
 
@@ -413,22 +359,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 8</span>
-              <span class="day-date">10.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~220 € (Gesamt) | ~55 € p.P.</span>
+            <span class="day-number">Tag 8</span>
+            <span class="day-date">10.07.</span>
           </div>
           <h2 class="day-title">Wander-Highlight #2: Snæfellsnes Küstenweg</h2>
-          <p class="day-description">Verzauberte Küstenlinien und Vulkanlandschaften rund um den Snæfellsjökull.</p>
+          <p class="day-description">Verzauberte Küstenlinien rund um den Snæfellsjökull.</p>
           <ul class="highlights">
             <li>Wasserfälle Hraunfossar & Barnafoss</li>
-            <li>Küstenwanderung Arnarstapi nach Hellnar (ca. 1,5 Std., eben & spektakulär)</li>
-            <li>Schwarzer Kieselstrand Djúpalónssandur mit historischen Hellebarden-Steinen</li>
-            <li>Blick auf die Felsformation Lóndrangar</li>
+            <li>Küstenwanderung Arnarstapi nach Hellnar</li>
           </ul>
         </div>
-        <span class="hotel-badge hotel-missing">⚠️ Hotel Halbinsel Westen gesucht (1 Nacht)</span>
+        <span class="hotel-badge hotel-missing">⚠️ Hotel Halbinsel Westen gesucht (4 Pers.)</span>
       </div>
     </div>
 
@@ -441,22 +382,17 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 9</span>
-              <span class="day-date">11.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~210 € (Gesamt) | ~52 € p.P.</span>
+            <span class="day-number">Tag 9</span>
+            <span class="day-date">11.07.</span>
           </div>
           <h2 class="day-title">Snæfellsnes $\rightarrow$ Borgir (Hrútafjörður)</h2>
-          <p class="day-description">Ikonische Fotospots und Panoramaroute Richtung Eingang der Westfjorde.</p>
+          <p class="day-description">Abreise Maria & Matthias / Weiterfahrt der verbleibenden Gruppe.</p>
           <ul class="highlights">
-            <li>Kirkjufell-Berg & Kirkjufellsfoss (Islands fotogenster Berg)</li>
-            <li>Bunte Fischerstadt Stykkishólmur</li>
-            <li>Panoramaküstenfahrt entlang des Breiðafjörður</li>
-            <li>Ankunft in Borgir & Entspannung im Hot Tub</li>
+            <li>Kirkjufell-Berg & Kirkjufellsfoss</li>
+            <li>Panoramaroute entlang des Breiðafjörður</li>
           </ul>
         </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (Nacht 1/2)</a>
+        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 1/2)</a>
       </div>
     </div>
 
@@ -469,15 +405,218 @@
       <div class="day-content">
         <div>
           <div class="day-header">
-            <div>
-              <span class="day-number">Tag 10</span>
-              <span class="day-date">12.07.</span>
-            </div>
-            <span class="day-cost-badge">Ø Tagesbudget: ~180 € (Gesamt) | ~45 € p.P.</span>
+            <span class="day-number">Tag 10</span>
+            <span class="day-date">12.07.</span>
           </div>
           <h2 class="day-title">Vatnsnes-Runde: Robben & Felsformationen</h2>
-          <p class="day-description">Entspannter Tagesausflug rund um die Halbinsel Vatnsnes.</p>
+          <p class="day-description">Tagesausflug rund um die Halbinsel Vatnsnes.</p>
           <ul class="highlights">
-            <li>Felsbogen Hvítserkur ("Trinkender Drache" im Meer)</li>
-            <li>Seehund-Beobachtungspunkt Illugastaðir (kurzer Weg zur Beobachtungs-Hütte)</li>
-            <li>Historis
+            <li>Felsbogen Hvítserkur ("Trinkender Drache")</li>
+            <li>Robbenbeobachtung bei Illugastaðir</li>
+          </ul>
+        </div>
+        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 2/2)</a>
+      </div>
+    </div>
+
+    <!-- Tag 11 -->
+    <div class="day-card">
+      <div class="day-banner" style="background: linear-gradient(135deg, #303f9f, #1a237e);">
+        <div class="icon">⛵</div>
+        <div class="loc-tag">Westfjorde</div>
+      </div>
+      <div class="day-content">
+        <div>
+          <div class="day-header">
+            <span class="day-number">Tag 11</span>
+            <span class="day-date">13.07.</span>
+          </div>
+          <h2 class="day-title">Große Fjordfahrt nach Ísafjörður</h2>
+          <p class="day-description">Spektakuläre Fahrt durch die Fjorde.</p>
+          <ul class="highlights">
+            <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
+            <li>Arctic Fox Centre in Súðavík</li>
+          </ul>
+        </div>
+        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 1/2)</a>
+      </div>
+    </div>
+
+    <!-- Tag 12 -->
+    <div class="day-card">
+      <div class="day-banner" style="background: linear-gradient(135deg, #00838f, #006064);">
+        <div class="icon">🐋</div>
+        <div class="loc-tag">Ísafjörður</div>
+      </div>
+      <div class="day-content">
+        <div>
+          <div class="day-header">
+            <span class="day-number">Tag 12</span>
+            <span class="day-date">14.07.</span>
+          </div>
+          <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
+          <p class="day-description">Bootstour, Aussichtswanderung und Fischrestaurant.</p>
+          <ul class="highlights">
+            <li>Whale-Watching-Bootstour ab Hafen Ísafjörður</li>
+            <li>Wanderung Naustahvilft ("Trollthron")</li>
+            <li>Abendessen im Tjöruhúsið</li>
+          </ul>
+        </div>
+        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 2/2)</a>
+      </div>
+    </div>
+
+    <!-- Tag 13 -->
+    <div class="day-card">
+      <div class="day-banner" style="background: linear-gradient(135deg, #c2185b, #880e4f);">
+        <div class="icon">✈️</div>
+        <div class="loc-tag">Dynjandi / Rückflug</div>
+      </div>
+      <div class="day-content">
+        <div>
+          <div class="day-header">
+            <span class="day-number">Tag 13</span>
+            <span class="day-date">15.07.</span>
+          </div>
+          <h2 class="day-title">Dynjandi-Wasserfall & Thermalabschluss</h2>
+          <p class="day-description">Rückfahrt nach Keflavík und späte Abreise.</p>
+          <ul class="highlights">
+            <li>Dynjandi-Wasserfall</li>
+            <li>Geothermales Bad vor dem Abflug</li>
+          </ul>
+        </div>
+        <span class="hotel-badge hotel-confirmed">✈️ Später Rückflug ab Keflavík</span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Gute Reise & Góða ferð!</p>
+  </footer>
+
+  <script>
+    // Exakte Daten aus dem PDF
+    const personData = {
+      all: {
+        title: "Gesamtkosten Reise (Gruppe)",
+        sub: "Summe aller Posten (6 Personen)",
+        total: "18.095,29 €",
+        items: [
+          { name: "Flüge (6x)", val: "3.780,00 €", sub: "630,00 € p.P." },
+          { name: "Unterkünfte Gesamt", val: "8.437,89 €", sub: "Hotels 1 - 7" },
+          { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2" },
+          { name: "Verpflegung Schätzung", val: "1.400,00 €", sub: "10 bzw. 14 Tage" },
+          { name: "Sprit Schätzung", val: "860,00 €", sub: "Auto 1 + Auto 2" }
+        ]
+      },
+      maria: {
+        title: "Erwartete Kosten für Maria",
+        sub: "Involviert bei Auto 1 (bis 11.Juli), Hotel 1-3, Flug & 10 Tage Verpflegung",
+        total: "2.502,77 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
+          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1 (178€), Hotel 2 (344,56€), Hotel 3 (360€)" },
+          { name: "Verpflegung (10 Tage)", val: "600,00 €", sub: "Kombiniert Maria & Matthias" }
+        ]
+      },
+      matthias: {
+        title: "Erwartete Kosten für Matthias",
+        sub: "Involviert bei Auto 1 (bis 11.Juli), Hotel 1-3, Flug & 10 Tage Verpflegung",
+        total: "2.502,77 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
+          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1 (178€), Hotel 2 (344,56€), Hotel 3 (360€)" },
+          { name: "Verpflegung (10 Tage)", val: "600,00 €", sub: "Kombiniert Maria & Matthias" }
+        ]
+      },
+      laura: {
+        title: "Erwartete Kosten für Laura",
+        sub: "Volle Zeit (14 Tage) involviert bei Auto 2, Hotels 1-7, Flug & Verpflegung",
+        total: "3.272,37 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Rene" },
+          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
+          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
+          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
+        ]
+      },
+      rene: {
+        title: "Erwartete Kosten für Rene",
+        sub: "Volle Zeit (14 Tage) involviert bei Auto 2, Hotels 1-7, Flug & Verpflegung",
+        total: "3.272,37 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Laura" },
+          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
+          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
+          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
+        ]
+      },
+      andrea: {
+        title: "Erwartete Kosten für Andrea",
+        sub: "Volle Zeit (14 Tage) involviert bei Auto 1, Hotels 1-7, Flug & Verpflegung",
+        total: "3.272,50 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10 Tage (330,25€) + 2 Tage alleine (264,20€)" },
+          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
+          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
+        ]
+      },
+      mano: {
+        title: "Erwartete Kosten für Mano",
+        sub: "Volle Zeit (14 Tage) involviert bei Auto 1, Hotels 1-7, Flug & Verpflegung",
+        total: "3.272,50 €",
+        items: [
+          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
+          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10 Tage (330,25€) + 2 Tage alleine (264,20€)" },
+          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
+          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
+        ]
+      }
+    };
+
+    function showPerson(key) {
+      const buttons = document.querySelectorAll('.btn-filter');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Active state button setzen
+      const btnMap = { all:0, maria:1, matthias:2, laura:3, rene:4, andrea:5, mano:6 };
+      if(buttons[btnMap[key]]) buttons[btnMap[key]].classList.add('active');
+
+      const data = personData[key];
+      
+      // Breakdown HTML bauen
+      let html = '';
+      data.items.forEach(item => {
+        html += `
+          <div class="item-card">
+            <h4>${item.name}</h4>
+            <div class="val">${item.val}</div>
+            <div class="sub">${item.sub}</div>
+          </div>
+        `;
+      });
+
+      document.getElementById('breakdown-grid').innerHTML = html;
+      document.getElementById('total-label').innerText = data.title;
+      document.getElementById('total-sub').innerText = data.sub;
+      document.getElementById('total-amount').innerText = data.total;
+    }
+
+    // Initialisierung beim Laden
+    window.onload = function() {
+      showPerson('all');
+    };
+  </script>
+
+</body>
+</html>
