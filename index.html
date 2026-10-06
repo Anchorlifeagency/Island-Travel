@@ -19,13 +19,13 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
     header {
-      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('tag1.jpg') center/cover;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       text-align: center;
-      padding: 80px 20px;
+      padding: 70px 20px;
     }
-    header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-    header p { font-size: 1.2rem; opacity: 0.95; }
+    header h1 { font-size: 2.4rem; margin-bottom: 10px; }
+    header p { font-size: 1.1rem; opacity: 0.9; }
 
     .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
@@ -53,11 +53,14 @@
     }
     @media (min-width: 768px) {
       .day-card { flex-direction: row; }
-      .day-image { width: 40%; object-fit: cover; }
-      .day-content { width: 60%; }
+      .day-banner { width: 35%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; padding: 30px 20px; text-align: center; }
+      .day-content { width: 65%; }
     }
-    
-    .day-image { height: 260px; width: 100%; object-fit: cover; }
+
+    .day-banner { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%); padding: 30px 20px; color: white; text-align: center; }
+    .day-banner .icon { font-size: 3rem; margin-bottom: 10px; }
+    .day-banner .loc-tag { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; }
+
     .day-content { padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
     
     .day-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
@@ -116,7 +119,10 @@
 
     <!-- Tag 1 -->
     <div class="day-card">
-      <img class="day-image" src="tag1.jpg" alt="Reykjavík im Sommer">
+      <div class="day-banner" style="background: linear-gradient(135deg, #2b5278, #1e3c72);">
+        <div class="icon">🏛️</div>
+        <div class="loc-tag">Reykjavík</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -138,7 +144,10 @@
 
     <!-- Tag 2 -->
     <div class="day-card">
-      <img class="day-image" src="tag2.jpg" alt="Reykjadalur Thermalfluss">
+      <div class="day-banner" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
+        <div class="icon">♨️</div>
+        <div class="loc-tag">Reykjadalur</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -160,7 +169,10 @@
 
     <!-- Tag 3 -->
     <div class="day-card">
-      <img class="day-image" src="tag3.jpg" alt="Golden Circle Gullfoss">
+      <div class="day-banner" style="background: linear-gradient(135deg, #0288d1, #01579b);">
+        <div class="icon">💦</div>
+        <div class="loc-tag">Golden Circle</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -183,7 +195,10 @@
 
     <!-- Tag 4 -->
     <div class="day-card">
-      <img class="day-image" src="tag4.jpg" alt="Þjórsárdalur Háifoss">
+      <div class="day-banner" style="background: linear-gradient(135deg, #388e3c, #1b5e20);">
+        <div class="icon">🏞️</div>
+        <div class="loc-tag">Þjórsárdalur</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -205,7 +220,10 @@
 
     <!-- Tag 5 -->
     <div class="day-card">
-      <img class="day-image" src="tag5.jpg" alt="Seljalandsfoss">
+      <div class="day-banner" style="background: linear-gradient(135deg, #1976d2, #0d47a1);">
+        <div class="icon">🌈</div>
+        <div class="loc-tag">Südküste</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -227,7 +245,10 @@
 
     <!-- Tag 6 -->
     <div class="day-card">
-      <img class="day-image" src="tag6.jpg" alt="Reynisfjara Vík">
+      <div class="day-banner" style="background: linear-gradient(135deg, #455a64, #263238);">
+        <div class="icon">🐧</div>
+        <div class="loc-tag">Vík & Kap</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -249,7 +270,10 @@
 
     <!-- Tag 7 -->
     <div class="day-card">
-      <img class="day-image" src="tag7.jpg" alt="Grábrók Krater">
+      <div class="day-banner" style="background: linear-gradient(135deg, #d32f2f, #8b0000);">
+        <div class="icon">🌋</div>
+        <div class="loc-tag">Bifröst</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -270,7 +294,10 @@
 
     <!-- Tag 8 -->
     <div class="day-card">
-      <img class="day-image" src="tag8.jpg" alt="Arnarstapi Snæfellsnes">
+      <div class="day-banner" style="background: linear-gradient(135deg, #00796b, #004d40);">
+        <div class="icon">🥾</div>
+        <div class="loc-tag">Snæfellsnes</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -292,7 +319,10 @@
 
     <!-- Tag 9 -->
     <div class="day-card">
-      <img class="day-image" src="tag9.jpg" alt="Kirkjufell Sommer">
+      <div class="day-banner" style="background: linear-gradient(135deg, #512da8, #311b92);">
+        <div class="icon">🏔️</div>
+        <div class="loc-tag">Kirkjufell</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -314,7 +344,10 @@
 
     <!-- Tag 10 -->
     <div class="day-card">
-      <img class="day-image" src="tag10.jpg" alt="Hvítserkur Fels">
+      <div class="day-banner" style="background: linear-gradient(135deg, #7b1fa2, #4a148c);">
+        <div class="icon">🦭</div>
+        <div class="loc-tag">Vatnsnes</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -335,7 +368,10 @@
 
     <!-- Tag 11 -->
     <div class="day-card">
-      <img class="day-image" src="tag11.jpg" alt="Westfjorde Panorama">
+      <div class="day-banner" style="background: linear-gradient(135deg, #303f9f, #1a237e);">
+        <div class="icon">⛵</div>
+        <div class="loc-tag">Westfjorde</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -356,7 +392,10 @@
 
     <!-- Tag 12 -->
     <div class="day-card">
-      <img class="day-image" src="tag12.jpg" alt="Whale Watching Ísafjörður">
+      <div class="day-banner" style="background: linear-gradient(135deg, #00838f, #006064);">
+        <div class="icon">🐋</div>
+        <div class="loc-tag">Ísafjörður</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -378,7 +417,10 @@
 
     <!-- Tag 13 -->
     <div class="day-card">
-      <img class="day-image" src="tag13.jpg" alt="Dynjandi Wasserfall Sommer">
+      <div class="day-banner" style="background: linear-gradient(135deg, #c2185b, #880e4f);">
+        <div class="icon">✈️</div>
+        <div class="loc-tag">Dynjandi / Rückflug</div>
+      </div>
       <div class="day-content">
         <div>
           <div class="day-header">
