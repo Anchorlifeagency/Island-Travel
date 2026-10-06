@@ -161,18 +161,18 @@
       <div class="filter-section">
         <div class="filter-title">👤 Wähle eine Person oder Gesamtübersicht:</div>
         <div class="filter-buttons">
-          <button class="btn-filter active" id="btn-all" onclick="showPerson('all')">Gesamte Gruppe (6 P.)</button>
-          <button class="btn-filter" id="btn-maria" onclick="showPerson('maria')">Maria</button>
-          <button class="btn-filter" id="btn-matthias" onclick="showPerson('matthias')">Matthias</button>
-          <button class="btn-filter" id="btn-laura" onclick="showPerson('laura')">Laura</button>
-          <button class="btn-filter" id="btn-rene" onclick="showPerson('rene')">Rene</button>
-          <button class="btn-filter" id="btn-andrea" onclick="showPerson('andrea')">Andrea</button>
-          <button class="btn-filter" id="btn-mano" onclick="showPerson('mano')">Mano</button>
+          <button class="btn-filter active" id="btn-gruppe" onclick="filterPerson('gruppe')">Gesamte Gruppe (6 P.)</button>
+          <button class="btn-filter" id="btn-maria" onclick="filterPerson('maria')">Maria</button>
+          <button class="btn-filter" id="btn-matthias" onclick="filterPerson('matthias')">Matthias</button>
+          <button class="btn-filter" id="btn-laura" onclick="filterPerson('laura')">Laura</button>
+          <button class="btn-filter" id="btn-rene" onclick="filterPerson('rene')">Rene</button>
+          <button class="btn-filter" id="btn-andrea" onclick="filterPerson('andrea')">Andrea</button>
+          <button class="btn-filter" id="btn-mano" onclick="filterPerson('mano')">Mano</button>
         </div>
       </div>
 
       <div class="person-breakdown" id="breakdown-grid">
-        <!-- Dynamische Inhalte werden über JS eingefügt -->
+        <!-- Inhalte werden per JS gefüllt -->
       </div>
 
       <div class="total-box">
@@ -248,7 +248,7 @@
           <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
           <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
           <ul class="highlights">
-            <li>Þingvellir Nationalpark (Erdspalte Almannagjá - Parkgebühr)</li>
+            <li>Þingvellir Nationalpark (Erdspalte Almannagjá)</li>
             <li>Geysir Strokkur & Gullfoss Wasserfall</li>
             <li>Wasserfall Brúarfoss</li>
           </ul>
@@ -496,13 +496,13 @@
   </footer>
 
   <script>
-    // Exakte Daten aus dem PDF + konservative Aktivitäts-Kalkulation
-    const personData = {
-      all: {
+    const dataStore = {
+      gruppe: {
         title: "Gesamtkosten Reise (Gruppe)",
         sub: "Summe aller Posten (6 Personen)",
         total: "19.225,29 €",
         items: [
           { name: "Flüge (6x)", val: "3.780,00 €", sub: "630,00 € p.P." },
           { name: "Unterkünfte Gesamt", val: "8.437,89 €", sub: "Hotels 1 - 7" },
-          { 
+          { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2" },
+    
