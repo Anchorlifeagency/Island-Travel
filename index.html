@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Island Reiseroute & Individuelle Kosten</title>
+  <title>Island Sommer-Tour 2027</title>
   <style>
     :root {
       --primary: #1a365d;
@@ -71,7 +71,7 @@
     /* Person-Cards Details */
     .person-breakdown {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
       margin-top: 20px;
     }
@@ -178,9 +178,9 @@
       <div class="total-box">
         <div>
           <div class="total-title" id="total-label">Gesamtkosten Reise</div>
-          <div style="font-size: 0.85rem; color: #4a5568;" id="total-sub">Exakte Summe laut Aufstellung</div>
+          <div style="font-size: 0.85rem; color: #4a5568;" id="total-sub">Inklusive Flüge, Unterkünfte, Autos, Verpflegung & Aktivitäten</div>
         </div>
-        <div class="total-amount" id="total-amount">18.095,29 €</div>
+        <div class="total-amount" id="total-amount">19.225,29 €</div>
       </div>
     </div>
 
@@ -212,7 +212,7 @@
     <!-- Tag 2 -->
     <div class="day-card">
       <div class="day-banner" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
-        <div class="icon">♨️</div>
+        <div class="icon">♨️️</div>
         <div class="loc-tag">Reykjadalur</div>
       </div>
       <div class="day-content">
@@ -226,7 +226,7 @@
           <ul class="highlights">
             <li>Wanderung durch das Geothermaltal Reykjadalur</li>
             <li>Baden im warmen Fluss im Sommergrün</li>
-            <li>Spaziergang am Kratersee Kerið</li>
+            <li>Spaziergang am Kratersee Kerið (ca. 4 € Eintritt p.P.)</li>
           </ul>
         </div>
         <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 1/3)</a>
@@ -248,7 +248,7 @@
           <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
           <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
           <ul class="highlights">
-            <li>Þingvellir Nationalpark (Erdspalte Almannagjá)</li>
+            <li>Þingvellir Nationalpark (Erdspalte Almannagjá - Parkgebühr)</li>
             <li>Geysir Strokkur & Gullfoss Wasserfall</li>
             <li>Wasserfall Brúarfoss</li>
           </ul>
@@ -435,7 +435,7 @@
           <p class="day-description">Spektakuläre Fahrt durch die Fjorde.</p>
           <ul class="highlights">
             <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
-            <li>Arctic Fox Centre in Súðavík</li>
+            <li>Arctic Fox Centre in Súðavík (~10 € Eintritt)</li>
           </ul>
         </div>
         <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 1/2)</a>
@@ -457,7 +457,7 @@
           <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
           <p class="day-description">Bootstour, Aussichtswanderung und Fischrestaurant.</p>
           <ul class="highlights">
-            <li>Whale-Watching-Bootstour ab Hafen Ísafjörður</li>
+            <li>Whale-Watching-Bootstour ab Hafen Ísafjörður (~90 € p.P.)</li>
             <li>Wanderung Naustahvilft ("Trollthron")</li>
             <li>Abendessen im Tjöruhúsið</li>
           </ul>
@@ -482,10 +482,10 @@
           <p class="day-description">Rückfahrt nach Keflavík und späte Abreise.</p>
           <ul class="highlights">
             <li>Dynjandi-Wasserfall</li>
-            <li>Geothermales Bad vor dem Abflug</li>
+            <li>Geothermales Bad vor dem Abflug (~55 € p.P.)</li>
           </ul>
         </div>
-        <span class="hotel-badge hotel-confirmed">✈️ Später Rückflug ab Keflavík</span>
+        <span class="hotel-badge hotel-confirmed">✈️️ Später Rückflug ab Keflavík</span>
       </div>
     </div>
 
@@ -496,127 +496,14 @@
   </footer>
 
   <script>
-    // Exakte Daten aus dem PDF
+    // Exakte Daten aus dem PDF + konservative Aktivitäts-Kalkulation
     const personData = {
       all: {
         title: "Gesamtkosten Reise (Gruppe)",
         sub: "Summe aller Posten (6 Personen)",
-        total: "18.095,29 €",
+        total: "19.225,29 €",
         items: [
           { name: "Flüge (6x)", val: "3.780,00 €", sub: "630,00 € p.P." },
           { name: "Unterkünfte Gesamt", val: "8.437,89 €", sub: "Hotels 1 - 7" },
           { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2" },
-          { name: "Verpflegung Schätzung", val: "1.400,00 €", sub: "10 bzw. 14 Tage" },
-          { name: "Sprit Schätzung", val: "860,00 €", sub: "Auto 1 + Auto 2" }
-        ]
-      },
-      maria: {
-        title: "Erwartete Kosten für Maria",
-        sub: "Involviert bei Auto 1 (bis 11.Juli), Hotel 1-3, Flug & 10 Tage Verpflegung",
-        total: "2.502,77 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1 (178€), Hotel 2 (344,56€), Hotel 3 (360€)" },
-          { name: "Verpflegung (10 Tage)", val: "600,00 €", sub: "Kombiniert Maria & Matthias" }
-        ]
-      },
-      matthias: {
-        title: "Erwartete Kosten für Matthias",
-        sub: "Involviert bei Auto 1 (bis 11.Juli), Hotel 1-3, Flug & 10 Tage Verpflegung",
-        total: "2.502,77 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1 (178€), Hotel 2 (344,56€), Hotel 3 (360€)" },
-          { name: "Verpflegung (10 Tage)", val: "600,00 €", sub: "Kombiniert Maria & Matthias" }
-        ]
-      },
-      laura: {
-        title: "Erwartete Kosten für Laura",
-        sub: "Volle Zeit (14 Tage) involviert bei Auto 2, Hotels 1-7, Flug & Verpflegung",
-        total: "3.272,37 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Rene" },
-          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
-          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
-          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
-        ]
-      },
-      rene: {
-        title: "Erwartete Kosten für Rene",
-        sub: "Volle Zeit (14 Tage) involviert bei Auto 2, Hotels 1-7, Flug & Verpflegung",
-        total: "3.272,37 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Laura" },
-          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
-          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
-          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
-        ]
-      },
-      andrea: {
-        title: "Erwartete Kosten für Andrea",
-        sub: "Volle Zeit (14 Tage) involviert bei Auto 1, Hotels 1-7, Flug & Verpflegung",
-        total: "3.272,50 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10 Tage (330,25€) + 2 Tage alleine (264,20€)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
-          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
-        ]
-      },
-      mano: {
-        title: "Erwartete Kosten für Mano",
-        sub: "Volle Zeit (14 Tage) involviert bei Auto 1, Hotels 1-7, Flug & Verpflegung",
-        total: "3.272,50 €",
-        items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10 Tage (330,25€) + 2 Tage alleine (264,20€)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1, 2, 3, 4, 5, 6, 7" },
-          { name: "Verpflegung (14 Tage)", val: "200,00 €", sub: "Anteil an 800€ (Laura, Rene, Andrea, Mano)" }
-        ]
-      }
-    };
-
-    function showPerson(key) {
-      const buttons = document.querySelectorAll('.btn-filter');
-      buttons.forEach(btn => btn.classList.remove('active'));
-
-      // Active state button setzen
-      const btnMap = { all:0, maria:1, matthias:2, laura:3, rene:4, andrea:5, mano:6 };
-      if(buttons[btnMap[key]]) buttons[btnMap[key]].classList.add('active');
-
-      const data = personData[key];
-      
-      // Breakdown HTML bauen
-      let html = '';
-      data.items.forEach(item => {
-        html += `
-          <div class="item-card">
-            <h4>${item.name}</h4>
-            <div class="val">${item.val}</div>
-            <div class="sub">${item.sub}</div>
-          </div>
-        `;
-      });
-
-      document.getElementById('breakdown-grid').innerHTML = html;
-      document.getElementById('total-label').innerText = data.title;
-      document.getElementById('total-sub').innerText = data.sub;
-      document.getElementById('total-amount').innerText = data.total;
-    }
-
-    // Initialisierung beim Laden
-    window.onload = function() {
-      showPerson('all');
-    };
-  </script>
-
-</body>
-</html>
+          { name: "Verpflegung
