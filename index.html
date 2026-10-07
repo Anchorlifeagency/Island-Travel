@@ -34,7 +34,7 @@
       background: var(--card-bg);
       border-radius: 12px;
       padding: 25px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       border-top: 5px solid var(--accent);
     }
@@ -68,6 +68,58 @@
       color: white;
       border-color: var(--accent);
     }
+
+    /* Cars Widget Section */
+    .cars-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .car-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+    .car-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .car-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+    .car-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+    .car-meta {
+      font-size: 0.85rem;
+      color: #718096;
+      margin-bottom: 12px;
+    }
+    .car-status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .car-booked { background: #e6fffa; color: #234e52; border: 1px solid #b2f5ea; }
+    .car-pending { background: #fff5f5; color: var(--missing); border: 1px solid #fed7d7; }
 
     /* Person-Cards Details */
     .person-breakdown {
@@ -194,11 +246,47 @@
       </div>
     </div>
 
+    <!-- MIETWAGEN UEBERSICHT -->
+    <div class="cars-section">
+      <!-- Auto 1 -->
+      <div class="car-card">
+        <img class="car-img" src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80" alt="Jeep Compass Limited 4x4">
+        <div class="car-body">
+          <div>
+            <div class="car-title">Auto 1: Jeep Compass Limited 4x4 (Automatik)</div>
+            <div class="car-meta">
+              • <b>Vermieter:</b> Reykjavik Cars (KEF Airport Free Shuttle)<br>
+              • <b>Zeitraum:</b> 04.07.2027 – 15.07.2027<br>
+              • <b>Fahrer:</b> Rene Feichtinger (Ref: 2461389 / Code: GZ1M84)<br>
+              • <b>Inklusive:</b> Platinum Package Vollschutz
+            </div>
+          </div>
+          <a href="https://www.reykjavikcars.com" target="_blank" class="car-status-badge car-booked">✓ Gebucht (210.736 ISK)</a>
+        </div>
+      </div>
+
+      <!-- Auto 2 -->
+      <div class="car-card">
+        <img class="car-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="4x4 SUV">
+        <div class="car-body">
+          <div>
+            <div class="car-title">Auto 2: Mittelklasse 4x4 SUV</div>
+            <div class="car-meta">
+              • <b>Zeitraum:</b> 02.07.2027 – 11.07.2027 (10 Tage)<br>
+              • <b>Beteiligt:</b> Maria, Matthias, Andrea, Mano<br>
+              • <b>Status:</b> Ausstehend / Reservierung in Abstimmung
+            </div>
+          </div>
+          <div class="car-status-badge car-pending">⏳ Buchung noch offen</div>
+        </div>
+      </div>
+    </div>
+
     <!-- TAGESABLAUF -->
 
     <!-- Tag 1 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=800&q=80" alt="Reykjavík">
+      <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Reykjavík Stadt">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -249,7 +337,7 @@
 
     <!-- Tag 3 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Gullfoss">
+      <img class="day-image" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Island Gletscher Landschaft">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -275,7 +363,7 @@
 
     <!-- Tag 4 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Háifoss">
+      <img class="day-image" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Háifoss Canyon">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -300,7 +388,7 @@
 
     <!-- Tag 5 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Seljalandsfoss">
+      <img class="day-image" src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Seljalandsfoss Wasserfall">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -325,7 +413,7 @@
 
     <!-- Tag 6 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Reynisfjara">
+      <img class="day-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Reynisfjara Strand">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -351,7 +439,7 @@
 
     <!-- Tag 7 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1476514525535-ce74f45814d0?auto=format&fit=crop&w=800&q=80" alt="Grábrók">
+      <img class="day-image" src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Vulkankrater Landschaft Island">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -376,7 +464,7 @@
 
     <!-- Tag 8 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Arnarstapi">
+      <img class="day-image" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Island Landschaft Küste">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -401,7 +489,7 @@
 
     <!-- Tag 9 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Kirkjufell">
+      <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Sommerlandschaft Island">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -426,7 +514,7 @@
 
     <!-- Tag 10 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Hvítserkur">
+      <img class="day-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Hvítserkur Küste">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -451,7 +539,7 @@
 
     <!-- Tag 11 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Westfjorde">
+      <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Westfjorde Panorama">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -502,7 +590,7 @@
 
     <!-- Tag 13 -->
     <div class="day-card">
-      <img class="day-image" src="https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?auto=format&fit=crop&w=800&q=80" alt="Dynjandi">
+      <img class="day-image" src="https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?auto=format&fit=crop&w=800&q=80" alt="Dynjandi Wasserfall">
       <div class="day-content">
         <div>
           <div class="day-header">
