@@ -12,16 +12,17 @@
       --card-bg: #ffffff;
       --text: #2d3748;
       --missing: #e53e3e;
+      --alt-bg: #f0f4f8;
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
     header {
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=80') center/cover;
       color: white;
       text-align: center;
-      padding: 50px 20px 30px;
+      padding: 60px 20px 40px;
     }
     header h1 { font-size: 2.2rem; margin-bottom: 8px; }
     header p { font-size: 1.05rem; opacity: 0.9; }
@@ -112,14 +113,11 @@
     }
     @media (min-width: 768px) {
       .day-card { flex-direction: row; }
-      .day-banner { width: 32%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; padding: 25px 15px; text-align: center; }
-      .day-content { width: 68%; }
+      .day-image { width: 35%; object-fit: cover; min-height: 240px; }
+      .day-content { width: 65%; }
     }
 
-    .day-banner { background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%); padding: 25px 15px; color: white; text-align: center; }
-    .day-banner .icon { font-size: 2.8rem; margin-bottom: 5px; }
-    .day-banner .loc-tag { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.85; }
-
+    .day-image { width: 100%; height: 240px; object-fit: cover; }
     .day-content { padding: 20px 25px; display: flex; flex-direction: column; justify-content: space-between; }
     .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
     .day-number { background: var(--primary); color: white; padding: 3px 10px; border-radius: 15px; font-weight: bold; font-size: 0.85rem; }
@@ -132,6 +130,18 @@
     .highlights li { position: relative; padding-left: 18px; margin-bottom: 4px; font-size: 0.9rem; }
     .highlights li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
+    /* Alternativen Box */
+    .alt-box {
+      background: var(--alt-bg);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+      color: #2d3748;
+    }
+    .alt-title { font-weight: bold; color: var(--primary); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+
     .hotel-badge {
       display: inline-block;
       padding: 6px 12px;
@@ -139,7 +149,7 @@
       font-size: 0.82rem;
       text-decoration: none;
       font-weight: 600;
-      margin-top: 8px;
+      margin-top: 4px;
     }
     .hotel-confirmed { background: #e2e8f0; color: var(--primary); }
     .hotel-missing { background: #fed7d7; color: var(--missing); }
@@ -151,7 +161,7 @@
 
   <header>
     <h1>Island Sommer-Tour 2027</h1>
-    <p>6 Personen | 2 Autos | Erwartete Kostenaufstellung</p>
+    <p>6 Personen | 2 Autos | Erwartete Kostenaufstellung & Tagesplanung</p>
   </header>
 
   <div class="container">
@@ -188,10 +198,7 @@
 
     <!-- Tag 1 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #2b5278, #1e3c72);">
-        <div class="icon">🏛️</div>
-        <div class="loc-tag">Reykjavík</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1529963183134-61a90db47eaf?auto=format&fit=crop&w=800&q=80" alt="Reykjavík">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -204,6 +211,11 @@
             <li>Hallgrímskirkja & Brauð & Co. (Zimtschnecken)</li>
             <li>Harpa Konzert- und Konferenzzentrum & Hafenpromenade</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Schlechtwetter-Tipps:</div>
+            • Perlan Museum (mit künstlicher Eishöhle & Planetarium)<br>
+            • FlyOver Iceland (virtueller Erlebnissimulator über die Landschaft)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (6 Pers.)</a>
       </div>
@@ -211,10 +223,7 @@
 
     <!-- Tag 2 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #2e7d32, #1b5e20);">
-        <div class="icon">♨</div>
-        <div class="loc-tag">Reykjadalur</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Reykjadalur">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -228,6 +237,11 @@
             <li>Baden im warmen Fluss im Sommergrün</li>
             <li>Spaziergang am Kratersee Kerið (ca. 4 € Eintritt p.P.)</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Wander-Erweiterung:</div>
+            • <b>Lange Wanderung:</b> Verlängerung der Reykjadalur-Tour weiter nach Ölkelduhnúkur.<br>
+            • <b>Alternative:</b> Geothermalpark Hveragerði (frisches Brot im Erdofen gebacken).
+          </div>
         </div>
         <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 1/3)</a>
       </div>
@@ -235,10 +249,7 @@
 
     <!-- Tag 3 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #0288d1, #01579b);">
-        <div class="icon">💦</div>
-        <div class="loc-tag">Golden Circle</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80" alt="Gullfoss">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -252,6 +263,11 @@
             <li>Geysir Strokkur & Gullfoss Wasserfall</li>
             <li>Wasserfall Brúarfoss</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Thermal-Tipp:</div>
+            • Laugarvatn Fontana (Geothermalbad mit direktem Seezugang)<br>
+            • Brúarhlöð Canyon (Beeindruckende Basaltschlucht nahe Gullfoss)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 2/3)</a>
       </div>
@@ -259,10 +275,7 @@
 
     <!-- Tag 4 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #388e3c, #1b5e20);">
-        <div class="icon">🏞️</div>
-        <div class="loc-tag">Þjórsárdalur</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Háifoss">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -275,6 +288,11 @@
             <li>Háifoss (zweithöchster Wasserfall Islands)</li>
             <li>Märchenhafte Oase Gjáin</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Kultur:</div>
+            • Stöng (Freilichtmuseum mit rekonstruiertem Wikingerhaus)<br>
+            • Þjófafoss Wasserfall (Versteckter Wasserfall vor der Kulisse der Hekla)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 3/3)</a>
       </div>
@@ -282,10 +300,7 @@
 
     <!-- Tag 5 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #1976d2, #0d47a1);">
-        <div class="icon">🌈</div>
-        <div class="loc-tag">Südküste</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=800&q=80" alt="Seljalandsfoss">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -298,6 +313,11 @@
             <li>Seljalandsfoss & Höhlenwasserfall Gljúfrabúi</li>
             <li>Skógafoss Wasserfall & Treppen-Aufstieg</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Museum & Grandiose Tageswanderung:</div>
+            • <b>Lava Centre Hvolsvöllur:</b> Interaktives Vulkanmuseum (Top bei Regen)<br>
+            • <b>Skógar-Trail (Fimmvörðuháls):</b> Der Weg der 26 Wasserfälle oberhalb von Skógafoss (beliebige Streckenlänge wandern und umkehren)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 1/2)</a>
       </div>
@@ -305,10 +325,7 @@
 
     <!-- Tag 6 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #455a64, #263238);">
-        <div class="icon">🐧</div>
-        <div class="loc-tag">Vík & Kap</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Reynisfjara">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -322,6 +339,11 @@
             <li>Reynisfjara: Schwarzer Sandstrand & Basaltsäulen</li>
             <li>Sólheimajökull Gletscherzunge</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen:</div>
+            • Katla Ice Cave Tour (Gletscherhöhle auf dem Kötlujökull)<br>
+            • Icelandic Lava Show in Vík (Echte flüssige Lava hautnah erleben)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 2/2)</a>
       </div>
@@ -329,10 +351,7 @@
 
     <!-- Tag 7 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #d32f2f, #8b0000);">
-        <div class="icon">🌋</div>
-        <div class="loc-tag">Bifröst</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1476514525535-ce74f45814d0?auto=format&fit=crop&w=800&q=80" alt="Grábrók">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -345,6 +364,11 @@
             <li>Aufstieg auf den Vulkankrater Grábrók</li>
             <li>Heiße Quellen Deildartunguhver</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Spa:</div>
+            • Krauma Geothermal Baths (Baden in mit Gletscherwasser gekühltem Quellwasser)<br>
+            • Snorrastofa in Reykholt (Historischer Ort des Wikinger-Dichters Snorri Sturluson)
+          </div>
         </div>
         <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (4 Pers.)</span>
       </div>
@@ -352,10 +376,7 @@
 
     <!-- Tag 8 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #00796b, #004d40);">
-        <div class="icon">🥾</div>
-        <div class="loc-tag">Snæfellsnes</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Arnarstapi">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -368,6 +389,11 @@
             <li>Wasserfälle Hraunfossar & Barnafoss</li>
             <li>Küstenwanderung Arnarstapi nach Hellnar</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Abenteuer:</div>
+            • Vatnshellir Höhlentour (8.000 Jahre alte Lava-Röhre 100m unter der Erde)<br>
+            • Ytri Tunga Strand (Bekannter Liegeplatz von Robbenfelsen)
+          </div>
         </div>
         <span class="hotel-badge hotel-missing">⚠️ Hotel Halbinsel Westen gesucht (4 Pers.)</span>
       </div>
@@ -375,10 +401,7 @@
 
     <!-- Tag 9 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #512da8, #311b92);">
-        <div class="icon">🏔️</div>
-        <div class="loc-tag">Kirkjufell</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Kirkjufell">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -391,6 +414,11 @@
             <li>Kirkjufell-Berg & Kirkjufellsfoss</li>
             <li>Panoramaroute entlang des Breiðafjörður</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen:</div>
+            • Bootstour ab Stykkishólmur (Vogelfelsen & Frische Meeresfrüchte aus dem Netz)<br>
+            • Bjarnarhöfn Haimuseum (Traditioneller Grönlandhai-Betrieb)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 1/2)</a>
       </div>
@@ -398,10 +426,7 @@
 
     <!-- Tag 10 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #7b1fa2, #4a148c);">
-        <div class="icon">🦭</div>
-        <div class="loc-tag">Vatnsnes</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="Hvítserkur">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -414,6 +439,11 @@
             <li>Felsbogen Hvítserkur ("Trinkender Drache")</li>
             <li>Robbenbeobachtung bei Illugastaðir</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & Naturdenkmal:</div>
+            • Kolugljúfur Canyon (Wilde Schlucht mit doppelter Kaskade Kolufossar)<br>
+            • Isländisches Seehundzentrum in Hvammstangi
+          </div>
         </div>
         <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 2/2)</a>
       </div>
@@ -421,10 +451,7 @@
 
     <!-- Tag 11 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #303f9f, #1a237e);">
-        <div class="icon">⛵</div>
-        <div class="loc-tag">Westfjorde</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80" alt="Westfjorde">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -437,6 +464,11 @@
             <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
             <li>Arctic Fox Centre in Súðavík (~10 € Eintritt)</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen & heiße Quellen:</div>
+            • Heydalur Hot Springs (Natürlicher geothermaler Pool mitten im Grünen)<br>
+            • Valagil Canyon Wanderung (Schöne Schluchtenwanderung nahe Ísafjörður)
+          </div>
         </div>
         <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 1/2)</a>
       </div>
@@ -444,10 +476,7 @@
 
     <!-- Tag 12 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #00838f, #006064);">
-        <div class="icon">🐋</div>
-        <div class="loc-tag">Ísafjörður</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Whale Watching">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -461,6 +490,11 @@
             <li>Wanderung Naustahvilft ("Trollthron")</li>
             <li>Abendessen im Tjöruhúsið</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Grandiose Naturerlebnis-Alternativen:</div>
+            • <b>Tagesausflug Hornstrandir:</b> Mit dem Boot nach Hesteyri ins unberührte Naturschutzgebiet.<br>
+            • <b>Kubbur Gratwanderung:</b> Spektakulärer Panoramablick über Ísafjörður.
+          </div>
         </div>
         <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 2/2)</a>
       </div>
@@ -468,10 +502,7 @@
 
     <!-- Tag 13 -->
     <div class="day-card">
-      <div class="day-banner" style="background: linear-gradient(135deg, #c2185b, #880e4f);">
-        <div class="icon">✈️</div>
-        <div class="loc-tag">Dynjandi / Rückflug</div>
-      </div>
+      <img class="day-image" src="https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?auto=format&fit=crop&w=800&q=80" alt="Dynjandi">
       <div class="day-content">
         <div>
           <div class="day-header">
@@ -484,6 +515,11 @@
             <li>Dynjandi-Wasserfall</li>
             <li>Geothermales Bad vor dem Abflug (~55 € p.P.)</li>
           </ul>
+          <div class="alt-box">
+            <div class="alt-title">💡 Alternativen:</div>
+            • Hellulaug Hot Spring (Kostenloses Felsenbad direkt am Meer im Süden der Westfjorde)<br>
+            • Hvammsvík Hot Springs (Direkt an der Küste im Hvalfjörður nahe Reykjavík)
+          </div>
         </div>
         <span class="hotel-badge hotel-confirmed">✈ Später Rückflug ab Keflavík</span>
       </div>
@@ -591,21 +627,17 @@
     };
 
     function filterPerson(targetKey) {
-      // 1. Alle Buttons entmarkieren
       const btns = document.querySelectorAll('.btn-filter');
       btns.forEach(b => b.classList.remove('active'));
 
-      // 2. Zielbutton markieren
       const targetBtn = document.getElementById('btn-' + targetKey);
       if (targetBtn) {
         targetBtn.classList.add('active');
       }
 
-      // 3. Daten abrufen
       const currentData = dataStore[targetKey];
       if (!currentData) return;
 
-      // 4. Grid bauen
       let gridHtml = '';
       currentData.items.forEach(item => {
         gridHtml += `
@@ -617,14 +649,12 @@
         `;
       });
 
-      // 5. In DOM einfügen
       document.getElementById('breakdown-grid').innerHTML = gridHtml;
       document.getElementById('total-label').innerText = currentData.title;
       document.getElementById('total-sub').innerText = currentData.sub;
       document.getElementById('total-amount').innerText = currentData.total;
     }
 
-    // Beim Laden direkt ausführen
     document.addEventListener('DOMContentLoaded', function() {
       filterPerson('gruppe');
     });
