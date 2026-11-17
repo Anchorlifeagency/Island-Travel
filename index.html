@@ -12,6 +12,7 @@
       --card-bg: #ffffff;
       --text: #2d3748;
       --missing: #e53e3e;
+      --pending: #d69e2e;
       --alt-bg: #f0f4f8;
     }
     
@@ -19,7 +20,7 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
     header {
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=80') center/cover;
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1600&q=80') center/cover;
       color: white;
       text-align: center;
       padding: 60px 20px 40px;
@@ -39,9 +40,7 @@
       border-top: 5px solid var(--accent);
     }
     
-    .filter-section {
-      margin-bottom: 20px;
-    }
+    .filter-section { margin-bottom: 20px; }
     .filter-title {
       font-size: 0.9rem;
       font-weight: bold;
@@ -68,6 +67,50 @@
       color: white;
       border-color: var(--accent);
     }
+
+    /* Flights Overview Section */
+    .flights-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 22px 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--primary);
+    }
+    .section-heading {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .flight-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.88rem;
+    }
+    .flight-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+    }
+    .flight-badge.return { background: #2b6cb0; }
+    .flight-route { font-weight: bold; color: var(--primary); font-size: 0.98rem; margin-bottom: 4px; }
+    .flight-detail { color: #4a5568; line-height: 1.45; }
 
     /* Cars Widget Section */
     .cars-section {
@@ -105,7 +148,7 @@
     }
     .car-meta {
       font-size: 0.85rem;
-      color: #718096;
+      color: #4a5568;
       margin-bottom: 12px;
     }
     .car-status-badge {
@@ -196,6 +239,12 @@
     }
     .alt-title { font-weight: bold; color: var(--primary); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
 
+    .hotel-badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
     .hotel-badge {
       display: inline-block;
       padding: 6px 12px;
@@ -203,9 +252,9 @@
       font-size: 0.82rem;
       text-decoration: none;
       font-weight: 600;
-      margin-top: 4px;
     }
     .hotel-confirmed { background: #e2e8f0; color: var(--primary); }
+    .hotel-favorit { background: #fefcbf; color: #744210; border: 1px solid #f6e05e; }
     .hotel-missing { background: #fed7d7; color: var(--missing); }
 
     footer { text-align: center; padding: 30px; color: #a0aec0; font-size: 0.9rem; }
@@ -215,7 +264,7 @@
 
   <header>
     <h1>Island Sommer-Tour 2027</h1>
-    <p>6 Personen | 2 Autos | Erwartete Kostenaufstellung & Tagesplanung</p>
+    <p>6 Personen | 2 Autos | 02.07. – 16.07.2027 | Kostenübersicht & Tagesplanung</p>
   </header>
 
   <div class="container">
@@ -248,6 +297,49 @@
       </div>
     </div>
 
+    <!-- FLUGZEITEN UEBERSICHT -->
+    <div class="flights-section">
+      <div class="section-heading">✈️ Flugplan (Austrian Airlines Wien ↔ Keflavík)</div>
+      <div class="flights-grid">
+        <div class="flight-card">
+          <span class="flight-badge">Hinflug Gruppe 1</span>
+          <div class="flight-route">Fr, 02.07.2027 • OS973</div>
+          <div class="flight-detail">
+            <b>Wer:</b> Maria, Matthias, Mano, Andrea<br>
+            <b>Abflug Wien:</b> 21:00 Uhr<br>
+            <b>Ankunft KEF:</b> 23:20 Uhr
+          </div>
+        </div>
+        <div class="flight-card">
+          <span class="flight-badge">Hinflug Gruppe 2</span>
+          <div class="flight-route">Sa, 03.07.2027 • OS973</div>
+          <div class="flight-detail">
+            <b>Wer:</b> Rene (und Laura)<br>
+            <b>Abflug Wien:</b> 21:00 Uhr<br>
+            <b>Ankunft KEF:</b> 23:20 Uhr
+          </div>
+        </div>
+        <div class="flight-card">
+          <span class="flight-badge return">Rückflug 1</span>
+          <div class="flight-route">Mo, 12.07.2027 • OS974</div>
+          <div class="flight-detail">
+            <b>Wer:</b> Maria & Matthias<br>
+            <b>Abflug KEF:</b> 00:10 Uhr (Nacht 11./12.07.)<br>
+            <b>Ankunft Wien:</b> 06:15 Uhr
+          </div>
+        </div>
+        <div class="flight-card">
+          <span class="flight-badge return">Rückflug 2</span>
+          <div class="flight-route">Fr, 16.07.2027 • OS974</div>
+          <div class="flight-detail">
+            <b>Wer:</b> Andrea, Mano, Laura, Rene<br>
+            <b>Abflug KEF:</b> 00:10 Uhr (Nacht 15./16.07.)<br>
+            <b>Ankunft Wien:</b> 06:15 Uhr
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- MIETWAGEN UEBERSICHT -->
     <div class="cars-section">
       <!-- Auto 1 -->
@@ -258,7 +350,8 @@
             <div class="car-title">Auto 1: Jeep Compass Limited 4x4 (Automatik)</div>
             <div class="car-meta">
               • <b>Vermieter:</b> Reykjavik Cars (KEF Airport Free Shuttle)<br>
-              • <b>Zeitraum:</b> 04.07.2027 – 15.07.2027<br>
+              • <b>Übernahme:</b> Nacht 03./04.07.2027 (ca. Mitternacht)<br>
+              • <b>Rückgabe:</b> 15.07.2027 (22:00 – 23:00 Uhr)<br>
               • <b>Fahrer:</b> Rene Feichtinger (Ref: 2461389 / Code: GZ1M84)<br>
               • <b>Inklusive:</b> Platinum Package Vollschutz
             </div>
@@ -274,8 +367,9 @@
           <div>
             <div class="car-title">Auto 2: Dacia Duster 4x4 (oder ähnlich)</div>
             <div class="car-meta">
-              • <b>Zeitraum:</b> 02.07.2027 – 11.07.2027 (10 Tage)<br>
-              • <b>Beteiligt:</b> Maria, Matthias, Andrea, Mano<br>
+              • <b>Übernahme:</b> Nacht 02./03.07.2027 (ca. Mitternacht)<br>
+              • <b>Rückgabe:</b> 15.07.2027 (22:00 – 23:00 Uhr)<br>
+              • <b>Besetzung:</b> Maria, Matthias, Andrea, Mano (bis 11.07.), danach Andrea & Mano<br>
               • <b>Status:</b> Ausstehend / Reservierung in Abstimmung
             </div>
           </div>
@@ -286,6 +380,28 @@
 
     <!-- TAGESABLAUF -->
 
+    <!-- Tag 0 -->
+    <div class="day-card">
+      <img class="day-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Abflug nach Island">
+      <div class="day-content">
+        <div>
+          <div class="day-header">
+            <span class="day-number">Anreise Teil 1</span>
+            <span class="day-date">Fr, 02.07.</span>
+          </div>
+          <h2 class="day-title">Abflug Gruppe 1 & Mietwagen-Übernahme</h2>
+          <p class="day-description">Maria, Matthias, Mano und Andrea starten am Freitagabend um 21:00 Uhr mit OS973 ab Wien (Landung 23:20 Uhr in Keflavík).</p>
+          <ul class="highlights">
+            <li>Übernahme von Auto 2 (Dacia Duster 4x4) gegen Mitternacht (02./03.07.)</li>
+            <li>Fahrt vom Flughafen Keflavík nach Reykjavík ins Hotel</li>
+          </ul>
+        </div>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (Nacht 02./03.07.)</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Tag 1 -->
     <div class="day-card">
       <img class="day-image" src="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80" alt="Reykjavík Stadt">
@@ -293,13 +409,13 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 1</span>
-            <span class="day-date">03.07.</span>
+            <span class="day-date">Sa, 03.07.</span>
           </div>
-          <h2 class="day-title">Ankunft & Sommerliches Reykjavík</h2>
-          <p class="day-description">Entspannte Ankunft der Gruppe, Übernahme beider Mietwagen und Stadtbummel.</p>
+          <h2 class="day-title">Reykjavík erkunden & späte Ankunft Rene</h2>
+          <p class="day-description">Maria, Matthias, Mano und Andrea erkunden tagsüber die isländische Hauptstadt. Rene fliegt abends um 21:00 Uhr (OS973, Ankunft 23:20 Uhr) nach.</p>
           <ul class="highlights">
-            <li>Hallgrímskirkja & Brauð & Co. (Zimtschnecken)</li>
-            <li>Harpa Konzert- und Konferenzzentrum & Hafenpromenade</li>
+            <li>Hallgrímskirkja, Brauð & Co. (Zimtschnecken) & Hafenpromenade Harpa</li>
+            <li>Rene übernimmt Auto 1 (Jeep Compass 4x4) gegen Mitternacht (03./04.07.) und stößt im Hotel Reykjavík zur Gruppe</li>
           </ul>
           <div class="alt-box">
             <div class="alt-title">💡 Alternativen & Schlechtwetter-Tipps:</div>
@@ -307,7 +423,9 @@
             • FlyOver Iceland (virtueller Erlebnissimulator über die Landschaft)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (6 Pers.)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-c48twd" target="_blank" class="hotel-badge hotel-confirmed">🏨 Hotel Reykjavík (Alle 6 Pers.)</a>
+        </div>
       </div>
     </div>
 
@@ -318,13 +436,12 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 2</span>
-            <span class="day-date">04.07.</span>
+            <span class="day-date">So, 04.07.</span>
           </div>
-          <h2 class="day-title">Wander-Highlight #1: Reykjadalur Thermalfluss</h2>
-          <p class="day-description">Fahrt Richtung Selfoss mit Badesachen im Rucksack und Zwischenstopps.</p>
+          <h2 class="day-title">Gemeinsamer Tourstart: Reykjadalur Thermalfluss</h2>
+          <p class="day-description">Die gemeinsame Rundreise mit beiden Autos Richtung Süden/Osten beginnt! Fahrt nach Selfoss mit Badesachen im Rucksack.</p>
           <ul class="highlights">
-            <li>Wanderung durch das Geothermaltal Reykjadalur</li>
-            <li>Baden im warmen Fluss im Sommergrün</li>
+            <li>Wanderung durch das Geothermaltal Reykjadalur & Baden im warmen Fluss</li>
             <li>Spaziergang am Kratersee Kerið (ca. 4 € Eintritt p.P.)</li>
           </ul>
           <div class="alt-box">
@@ -333,7 +450,9 @@
             • <b>Alternative:</b> Geothermalpark Hveragerði (frisches Brot im Erdofen gebacken).
           </div>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 1/3)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 1/3)</a>
+        </div>
       </div>
     </div>
 
@@ -344,7 +463,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 3</span>
-            <span class="day-date">05.07.</span>
+            <span class="day-date">Mo, 05.07.</span>
           </div>
           <h2 class="day-title">Der Golden Circle mit versteckten Stopps</h2>
           <p class="day-description">Kurze Fahrstrecken erlauben heute ein dichtes, entspanntes Sightseeing-Programm.</p>
@@ -359,7 +478,9 @@
             • Brúarhlöð Canyon (Beeindruckende Basaltschlucht nahe Gullfoss)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 2/3)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 2/3)</a>
+        </div>
       </div>
     </div>
 
@@ -370,7 +491,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 4</span>
-            <span class="day-date">06.07.</span>
+            <span class="day-date">Di, 06.07.</span>
           </div>
           <h2 class="day-title">Þjórsárdalur-Tal & Oasen des Südens</h2>
           <p class="day-description">Ausflug abseits der Massen zu gewaltigen Wasserfällen.</p>
@@ -384,7 +505,9 @@
             • Þjófafoss Wasserfall (Versteckter Wasserfall vor der Kulisse der Hekla)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 3/3)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-uP1lHg" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sandlækur 1, Selfoss (6 Pers. - Nacht 3/3)</a>
+        </div>
       </div>
     </div>
 
@@ -395,7 +518,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 5</span>
-            <span class="day-date">07.07.</span>
+            <span class="day-date">Mi, 07.07.</span>
           </div>
           <h2 class="day-title">Südküsten-Wasserfälle Richtung Vík</h2>
           <p class="day-description">Fahrt entlang der Kulisse des Eyjafjallajökull mit Klassikern am Weg.</p>
@@ -409,7 +532,9 @@
             • <b>Skógar-Trail (Fimmvörðuháls):</b> Der Weg der 26 Wasserfälle oberhalb von Skógafoss (beliebige Streckenlänge wandern und umkehren)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 1/2)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 1/2)</a>
+        </div>
       </div>
     </div>
 
@@ -420,7 +545,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 6</span>
-            <span class="day-date">08.07.</span>
+            <span class="day-date">Do, 08.07.</span>
           </div>
           <h2 class="day-title">Papageientaucher, Basalt & Gletscherzunge</h2>
           <p class="day-description">Ein voller Tag rund um Vík mit extrem kurzen Fahrzeiten.</p>
@@ -435,7 +560,9 @@
             • Icelandic Lava Show in Vík (Echte flüssige Lava hautnah erleben)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 2/2)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-8bi1ory" target="_blank" class="hotel-badge hotel-confirmed">🏡 Pétursey 2, Vík (6 Pers. - Nacht 2/2)</a>
+        </div>
       </div>
     </div>
 
@@ -446,10 +573,10 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 7</span>
-            <span class="day-date">09.07.</span>
+            <span class="day-date">Fr, 09.07.</span>
           </div>
           <h2 class="day-title">Fahrt in den Westen & Krater-Panorama</h2>
-          <p class="day-description">Etappe vom Süden gen Westen.</p>
+          <p class="day-description">Etappe vom Süden gen Westen (ca. 1,5 Std. vom Flughafen entfernt).</p>
           <ul class="highlights">
             <li>Aufstieg auf den Vulkankrater Grábrók</li>
             <li>Heiße Quellen Deildartunguhver</li>
@@ -460,7 +587,9 @@
             • Snorrastofa in Reykholt (Historischer Ort des Wikinger-Dichters Snorri Sturluson)
           </div>
         </div>
-        <span class="hotel-badge hotel-missing">⚠️ Hotel bei Bifröst gesucht (4 Pers.)</span>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-aKc5pi" target="_blank" class="hotel-badge hotel-favorit">⭐ Favorit 09.–11.07. (6 Pers. | 920 € gesamt | noch ungebucht, keine kostenfreie Stornierung)</a>
+        </div>
       </div>
     </div>
 
@@ -471,7 +600,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 8</span>
-            <span class="day-date">10.07.</span>
+            <span class="day-date">Sa, 10.07.</span>
           </div>
           <h2 class="day-title">Wander-Highlight #2: Snæfellsnes Küstenweg</h2>
           <p class="day-description">Verzauberte Küstenlinien rund um den Snæfellsjökull.</p>
@@ -485,7 +614,9 @@
             • Ytri Tunga Strand (Bekannter Liegeplatz von Robbenfelsen)
           </div>
         </div>
-        <span class="hotel-badge hotel-missing">⚠️ Hotel Halbinsel Westen gesucht (4 Pers.)</span>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-aKc5pi" target="_blank" class="hotel-badge hotel-favorit">⭐ Favorit 09.–11.07. (Nacht 2/2 | 6 Pers.)</a>
+        </div>
       </div>
     </div>
 
@@ -496,21 +627,23 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 9</span>
-            <span class="day-date">11.07.</span>
+            <span class="day-date">So, 11.07.</span>
           </div>
-          <h2 class="day-title">Snæfellsnes $\rightarrow$ Borgir (Hrútafjörður)</h2>
-          <p class="day-description">Abreise Maria & Matthias / Weiterfahrt der verbleibenden Gruppe.</p>
+          <h2 class="day-title">Kirkjufell & Abend-Transfer Maria & Matthias nach KEF</h2>
+          <p class="day-description">Maria und Matthias nutzen noch den ganzen Tag mit der Gruppe (kein Hotel 11./12.07. nötig). Spätabends bringen Andrea und/oder Mano die beiden zum Flughafen Keflavík (Abflug 12.07. um 00:10 Uhr, OS974, Ankunft Wien 06:15 Uhr).</p>
           <ul class="highlights">
             <li>Kirkjufell-Berg & Kirkjufellsfoss</li>
-            <li>Panoramaroute entlang des Breiðafjörður</li>
+            <li>Panoramaroute & spätabends Flughafentransfer KEF für Maria & Matthias</li>
           </ul>
           <div class="alt-box">
-            <div class="alt-title">💡 Alternativen:</div>
-            • Bootstour ab Stykkishólmur (Vogelfelsen & Frische Meeresfrüchte aus dem Netz)<br>
-            • Bjarnarhöfn Haimuseum (Traditioneller Grönlandhai-Betrieb)
+            <div class="alt-title">💡 Logistik-Hinweis für die verbleibenden 4 Personen (11.–12.07.):</div>
+            • Da Andrea/Mano abends zum Flughafen KEF fahren, ist für die Nacht 11./12.07. ein Hotel näher bei Reykjavík/KEF sinnvoller als direkt in Borgir (noch zu entscheiden & buchen).
           </div>
         </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 1/2)</a>
+        <div class="hotel-badges-row">
+          <span class="hotel-badge hotel-missing">⚠️ Hotel 11.–12.07. nahe Reykjavík / KEF (4 Pers.) noch offen</span>
+          <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Option: Borgir 500</a>
+        </div>
       </div>
     </div>
 
@@ -521,10 +654,10 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 10</span>
-            <span class="day-date">12.07.</span>
+            <span class="day-date">Mo, 12.07.</span>
           </div>
           <h2 class="day-title">Vatnsnes-Runde: Robben & Felsformationen</h2>
-          <p class="day-description">Tagesausflug rund um die Halbinsel Vatnsnes.</p>
+          <p class="day-description">Tagesausflug zu viert (Andrea, Mano, Laura, Rene) rund um die Halbinsel Vatnsnes.</p>
           <ul class="highlights">
             <li>Felsbogen Hvítserkur ("Trinkender Drache")</li>
             <li>Robbenbeobachtung bei Illugastaðir</li>
@@ -535,7 +668,9 @@
             • Isländisches Seehundzentrum in Hvammstangi
           </div>
         </div>
-        <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers. - Nacht 2/2)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-g8gX67w" target="_blank" class="hotel-badge hotel-confirmed">🏡 Borgir 500 (4 Pers.)</a>
+        </div>
       </div>
     </div>
 
@@ -546,10 +681,10 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 11</span>
-            <span class="day-date">13.07.</span>
+            <span class="day-date">Di, 13.07.</span>
           </div>
           <h2 class="day-title">Große Fjordfahrt nach Ísafjörður</h2>
-          <p class="day-description">Spektakuläre Fahrt durch die Fjorde.</p>
+          <p class="day-description">Spektakuläre Fahrt durch die Westfjorde.</p>
           <ul class="highlights">
             <li>Panoramaküste des Ísafjarðardjúp-Fjords</li>
             <li>Arctic Fox Centre in Súðavík (~10 € Eintritt)</li>
@@ -560,7 +695,9 @@
             • Valagil Canyon Wanderung (Schöne Schluchtenwanderung nahe Ísafjörður)
           </div>
         </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 1/2)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 1/2)</a>
+        </div>
       </div>
     </div>
 
@@ -571,7 +708,7 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 12</span>
-            <span class="day-date">14.07.</span>
+            <span class="day-date">Mi, 14.07.</span>
           </div>
           <h2 class="day-title">Whale Watching & Wander-Highlight #3</h2>
           <p class="day-description">Bootstour, Aussichtswanderung und Fischrestaurant.</p>
@@ -586,7 +723,9 @@
             • <b>Kubbur Gratwanderung:</b> Spektakulärer Panoramablick über Ísafjörður.
           </div>
         </div>
-        <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 2/2)</a>
+        <div class="hotel-badges-row">
+          <a href="https://www.booking.com/Share-BMkOoo" target="_blank" class="hotel-badge hotel-confirmed">🏡 Sundstræti 43, Ísafjörður (4 Pers. - Nacht 2/2)</a>
+        </div>
       </div>
     </div>
 
@@ -597,21 +736,24 @@
         <div>
           <div class="day-header">
             <span class="day-number">Tag 13</span>
-            <span class="day-date">15.07.</span>
+            <span class="day-date">Do, 15.07. – Fr, 16.07.</span>
           </div>
-          <h2 class="day-title">Dynjandi-Wasserfall & Thermalabschluss</h2>
-          <p class="day-description">Rückfahrt nach Keflavík und späte Abreise.</p>
+          <h2 class="day-title">Dynjandi-Wasserfall, Mietwagen-Rückgabe & Rückflug</h2>
+          <p class="day-description">Rückfahrt Richtung Keflavík, Rückgabe beider Mietwagen zwischen 22:00 und 23:00 Uhr und Rückflug mit OS974 am 16.07. um 00:10 Uhr (Ankunft Wien 06:15 Uhr).</p>
           <ul class="highlights">
-            <li>Dynjandi-Wasserfall</li>
-            <li>Geothermales Bad vor dem Abflug (~55 € p.P.)</li>
+            <li>Dynjandi-Wasserfall & Geothermales Bad vor dem Abflug (~55 € p.P.)</li>
+            <li>Rückgabe Auto 1 & Auto 2 am Flughafen KEF (22:00 – 23:00 Uhr)</li>
+            <li>Abflug OS974 am 16.07. um 00:10 Uhr (Landung Wien 06:15 Uhr)</li>
           </ul>
           <div class="alt-box">
-            <div class="alt-title">💡 Alternativen:</div>
+            <div class="alt-title">💡 Alternativen unterwegs:</div>
             • Hellulaug Hot Spring (Kostenloses Felsenbad direkt am Meer im Süden der Westfjorde)<br>
             • Hvammsvík Hot Springs (Direkt an der Küste im Hvalfjörður nahe Reykjavík)
           </div>
         </div>
-        <span class="hotel-badge hotel-confirmed">✈ Später Rückflug ab Keflavík</span>
+        <div class="hotel-badges-row">
+          <span class="hotel-badge hotel-confirmed">✈ Rückflug OS974: 16.07. 00:10 Uhr ab KEF</span>
+        </div>
       </div>
     </div>
 
@@ -630,7 +772,7 @@
         items: [
           { name: "Flüge (6x)", val: "3.780,00 €", sub: "630,00 € p.P." },
           { name: "Unterkünfte Gesamt", val: "8.437,89 €", sub: "Hotels 1 - 7" },
-          { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2" },
+          { name: "Mietwagen Gesamt", val: "3.549,40 €", sub: "Auto 1 + Auto 2 (bis 15.07.)" },
           { name: "Verpflegung Schätzung", val: "3.400,00 €", sub: "2x 600€ (10T) + 4x 800€ (14T)" },
           { name: "Sprit Schätzung", val: "860,00 €", sub: "Auto 1 + Auto 2" },
           { name: "Aktivitäten Schätzung", val: "1.130,00 €", sub: "2x 85€ + 4x 240€" }
@@ -638,38 +780,38 @@
       },
       maria: {
         title: "Erwartete Kosten für Maria",
-        sub: "10 Tage: Auto 1 (bis 11.07.), Hotel 1-3, Flug, 60€/Tag Verpflegung & Aktivitäten",
+        sub: "02.07.–12.07. (10 Tage): Auto 2 (bis 11.07.), Hotels bis 11.07., Flug OS973/OS974, 60€/Tag Verpflegung",
         total: "2.587,77 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1, 2, 3 Anteile" },
+          { name: "Flug", val: "630,00 €", sub: "02.07. – 12.07. (1/6 Anteil)" },
+          { name: "Auto 2 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
+          { name: "Sprit Auto 2", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (bis 11.07.)", val: "832,52 €", sub: "Hotelanteile bis 11.07." },
           { name: "Verpflegung (10T)", val: "600,00 €", sub: "60 € / Tag x 10 Tage" },
           { name: "Aktivitäten (10T)", val: "85,00 €", sub: "Kerið, Parken, Bad" }
         ]
       },
       matthias: {
         title: "Erwartete Kosten für Matthias",
-        sub: "10 Tage: Auto 1 (bis 11.07.), Hotel 1-3, Flug, 60€/Tag Verpflegung & Aktivitäten",
+        sub: "02.07.–12.07. (10 Tage): Auto 2 (bis 11.07.), Hotels bis 11.07., Flug OS973/OS974, 60€/Tag Verpflegung",
         total: "2.587,77 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
-          { name: "Unterkünfte (1-3)", val: "832,52 €", sub: "Hotel 1, 2, 3 Anteile" },
+          { name: "Flug", val: "630,00 €", sub: "02.07. – 12.07. (1/6 Anteil)" },
+          { name: "Auto 2 (bis 11.07.)", val: "330,25 €", sub: "1/4 Anteil (10 Tage)" },
+          { name: "Sprit Auto 2", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Unterkünfte (bis 11.07.)", val: "832,52 €", sub: "Hotelanteile bis 11.07." },
           { name: "Verpflegung (10T)", val: "600,00 €", sub: "60 € / Tag x 10 Tage" },
           { name: "Aktivitäten (10T)", val: "85,00 €", sub: "Kerið, Parken, Bad" }
         ]
       },
       laura: {
         title: "Erwartete Kosten für Laura",
-        sub: "14 Tage: Auto 2, Hotels 1-7, Flug, 57€/Tag Verpflegung & Aktivitäten",
+        sub: "03.07.–16.07. (14 Tage): Auto 1, Hotels 1-7, Flug OS973/OS974, 57€/Tag Verpflegung",
         total: "4.112,37 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Rene" },
-          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
+          { name: "Flug", val: "630,00 €", sub: "03.07. – 16.07. (1/6 Anteil)" },
+          { name: "Auto 1 (04.–15.07.)", val: "850,00 €", sub: "1/2 Anteil mit Rene" },
+          { name: "Sprit Auto 1", val: "210,00 €", sub: "1/2 Anteil" },
           { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1 bis 7" },
           { name: "Verpflegung (14T)", val: "800,00 €", sub: "57,14 € / Tag x 14 Tage" },
           { name: "Aktivitäten (14T)", val: "240,00 €", sub: "Whale Watching, Lagoon, Eintritte" }
@@ -677,12 +819,12 @@
       },
       rene: {
         title: "Erwartete Kosten für Rene",
-        sub: "14 Tage: Auto 2, Hotels 1-7, Flug, 57€/Tag Verpflegung & Aktivitäten",
+        sub: "03.07.–16.07. (14 Tage): Auto 1, Hotels 1-7, Flug OS973/OS974, 57€/Tag Verpflegung",
         total: "4.112,37 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 2 (13 Tage)", val: "850,00 €", sub: "1/2 Anteil mit Laura" },
-          { name: "Sprit Auto 2", val: "210,00 €", sub: "1/2 Anteil" },
+          { name: "Flug", val: "630,00 €", sub: "03.07. – 16.07. (1/6 Anteil)" },
+          { name: "Auto 1 (04.–15.07.)", val: "850,00 €", sub: "1/2 Anteil mit Laura" },
+          { name: "Sprit Auto 1", val: "210,00 €", sub: "1/2 Anteil" },
           { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1 bis 7" },
           { name: "Verpflegung (14T)", val: "800,00 €", sub: "57,14 € / Tag x 14 Tage" },
           { name: "Aktivitäten (14T)", val: "240,00 €", sub: "Whale Watching, Lagoon, Eintritte" }
@@ -690,12 +832,12 @@
       },
       andrea: {
         title: "Erwartete Kosten für Andrea",
-        sub: "14 Tage: Auto 1, Hotels 1-7, Flug, 57€/Tag Verpflegung & Aktivitäten",
+        sub: "02.07.–16.07. (14 Tage): Auto 2 (03.–15.07.), Hotels 1-7, Flug OS973/OS974, 57€/Tag Verpflegung",
         total: "4.112,50 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10T (330,25€) + 2T alleine (264,20€)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Flug", val: "630,00 €", sub: "02.07. – 16.07. (1/6 Anteil)" },
+          { name: "Auto 2 (03.–15.07.)", val: "594,45 €", sub: "Anteil 10T (330,25€) + 4T zu zweit (264,20€)" },
+          { name: "Sprit Auto 2", val: "110,00 €", sub: "1/4 Anteil" },
           { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1 bis 7" },
           { name: "Verpflegung (14T)", val: "800,00 €", sub: "57,14 € / Tag x 14 Tage" },
           { name: "Aktivitäten (14T)", val: "240,00 €", sub: "Whale Watching, Lagoon, Eintritte" }
@@ -703,12 +845,12 @@
       },
       mano: {
         title: "Erwartete Kosten für Mano",
-        sub: "14 Tage: Auto 1, Hotels 1-7, Flug, 57€/Tag Verpflegung & Aktivitäten",
+        sub: "02.07.–16.07. (14 Tage): Auto 2 (03.–15.07.), Hotels 1-7, Flug OS973/OS974, 57€/Tag Verpflegung",
         total: "4.112,50 €",
         items: [
-          { name: "Flug", val: "630,00 €", sub: "1/6 Anteil" },
-          { name: "Auto 1 (gesamte Zeit)", val: "594,45 €", sub: "Anteil 10T (330,25€) + 2T alleine (264,20€)" },
-          { name: "Sprit Auto 1", val: "110,00 €", sub: "1/4 Anteil" },
+          { name: "Flug", val: "630,00 €", sub: "02.07. – 16.07. (1/6 Anteil)" },
+          { name: "Auto 2 (03.–15.07.)", val: "594,45 €", sub: "Anteil 10T (330,25€) + 4T zu zweit (264,20€)" },
+          { name: "Sprit Auto 2", val: "110,00 €", sub: "1/4 Anteil" },
           { name: "Unterkünfte (1-7)", val: "1.382,37 €", sub: "Anteil Hotels 1 bis 7" },
           { name: "Verpflegung (14T)", val: "800,00 €", sub: "57,14 € / Tag x 14 Tage" },
           { name: "Aktivitäten (14T)", val: "240,00 €", sub: "Whale Watching, Lagoon, Eintritte" }
